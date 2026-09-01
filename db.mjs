@@ -209,15 +209,19 @@ export async function listSessions() {
 
 // ---- dashboard-configurable appearance settings ----
 
-export async function getSettings() {
-  return readJson(SETTINGS_FILE);
+const getUserSettingsFile = (discordId) => path.join(DATA_DIR, `settings_${discordId}.json`);
+
+export async function getSettings(discordId) {
+  if (!discordId) return readJson(SETTINGS_FILE); // Fallback for global context if needed
+  return readJson(getUserSettingsFile(discordId));
 }
 
-export async function updateSettings(patch) {
+export async function updateSettings(discordId, patch) {
   return serialize(async () => {
-    const settings = await readJson(SETTINGS_FILE);
+    const file = discordId ? getUserSettingsFile(discordId) : SETTINGS_FILE;
+    const settings = await readJson(file);
     const next = { ...settings, ...patch };
-    await writeJson(SETTINGS_FILE, next);
+    await writeJson(file, next);
     return next;
   });
 }

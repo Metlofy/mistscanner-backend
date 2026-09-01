@@ -385,10 +385,15 @@ app.post('/api/scan', scanLimiter, requireClientSecret, async (req, res) => {
 
 app.post('/api/sessions', apiLimiter, requireAuth, requireActiveKey, async (req, res) => {
   const code = generatePin();
+  const creatorDiscordId = req.user.discordId;
+  const creatorSettings = await getSettings(creatorDiscordId);
+
   const session = {
     code,
     game: req.body.game?.slice(0, 50) || '',
     createdBy: req.user.discordUsername,
+    creatorDiscordId,
+    creatorSettings,
     createdAt: new Date().toISOString(),
     expiresAt: new Date(Date.now() + SESSION_TTL_MS).toISOString(),
     usedAt: null,
@@ -556,16 +561,25 @@ app.get('/api/audit', apiLimiter, requireAuth, requireOwner, async (req, res) =>
 });
 
 app.get('/api/settings', apiLimiter, requireAuth, requireActiveKey, async (req, res) => {
-  res.json(await getSettings());
+  res.json(await getSettings(req.user.discordId));
 });
 
 app.patch('/api/settings', apiLimiter, requireAuth, requireActiveKey, async (req, res) => {
-  const r = await updateSettings(req.body);
+  const r = await updateSettings(req.user.discordId, req.body);
   await appendAudit({ action: 'settings_updated', by: req.user.discordUsername });
   res.json(r);
 });
 
 app.get('/api/client-settings', apiLimiter, requireClientSecret, async (req, res) => {
+  res.json(await getSettings()); // fallback to global
+});
+
+app.get('/api/client-settings/:code', apiLimiter, requireClientSecret, async (req, res) => {
+  const code = req.params.code;
+  const session = await getSession(code);
+  if (session && session.creatorSettings) {
+    return res.json(session.creatorSettings);
+  }
   res.json(await getSettings());
 });
 
