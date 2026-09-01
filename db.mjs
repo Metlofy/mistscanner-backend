@@ -212,14 +212,24 @@ export async function listSessions() {
 const getUserSettingsFile = (discordId) => path.join(DATA_DIR, `settings_${discordId}.json`);
 
 export async function getSettings(discordId) {
-  if (!discordId) return readJson(SETTINGS_FILE); // Fallback for global context if needed
-  return readJson(getUserSettingsFile(discordId));
+  try {
+    if (!discordId) return await readJson(SETTINGS_FILE);
+    return await readJson(getUserSettingsFile(discordId));
+  } catch (err) {
+    if (err.code === 'ENOENT') return {};
+    throw err;
+  }
 }
 
 export async function updateSettings(discordId, patch) {
   return serialize(async () => {
     const file = discordId ? getUserSettingsFile(discordId) : SETTINGS_FILE;
-    const settings = await readJson(file);
+    let settings = {};
+    try {
+      settings = await readJson(file);
+    } catch (err) {
+      if (err.code !== 'ENOENT') throw err;
+    }
     const next = { ...settings, ...patch };
     await writeJson(file, next);
     return next;
