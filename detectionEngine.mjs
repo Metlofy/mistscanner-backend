@@ -1,17 +1,4 @@
 // detectionEngine.mjs
-//
-// Takes the raw artifact bundle a client submits (process list, prefetch
-// entries, BAM entries, warnings, etc.) and matches it against the active
-// rule set. Returns a list of Detection objects the dashboard can render.
-//
-// This is a small, transparent rules engine on purpose: "filename" rules do
-// a case-insensitive substring match against every collected artifact name,
-// and "warning" rules match against a fixed set of warning codes the client
-// is expected to emit (see client ScanModels.cs -> Warnings).
-//
-// Real deployments should treat this file as a starting point: add hash
-// matching, fuzzy/Levenshtein matching for renamed binaries, and your own
-// curated signature list.
 
 function collectArtifactNames(report) {
   const names = [];
@@ -22,18 +9,14 @@ function collectArtifactNames(report) {
   for (const s of report.shimCache ?? []) names.push(s.path);
   for (const a of report.amcache ?? []) names.push(a.path);
   for (const r of report.rpf ?? []) names.push(r.path);
-  // Newer collectors: loaded modules (DLL injection), Run/RunOnce
-  // persistence keys, and recently deleted files (recycle bin / USN
-  // journal). Same "just a name to match against" treatment as everything
-  // else here.
   for (const m of report.modules ?? []) names.push(m.moduleName, m.path, m.ownerProcess);
   for (const k of report.runKeys ?? []) names.push(k.name, k.command, k.hive);
   for (const d of report.deletedFiles ?? []) names.push(d.originalPath ?? d.path);
+  for (const n of report.networkConnections ?? []) names.push(n.remoteAddress, n.processName);
+  for (const d of report.dnsCache ?? []) names.push(d.entryName);
   return names.filter(Boolean).map((n) => n.toLowerCase());
 }
 
-// Hashes are kept separate from names: a hash rule should only ever match
-// an actual SHA-1 value, never get a lucky substring hit against a path.
 function collectArtifactHashes(report) {
   const hashes = [];
   for (const a of report.amcache ?? []) if (a.sha1) hashes.push(a.sha1);
@@ -41,15 +24,32 @@ function collectArtifactHashes(report) {
   return hashes.filter(Boolean).map((h) => h.toLowerCase());
 }
 
-// Rules ship from staff input, not developer-reviewed code, so a broken
-// regex must degrade to "this rule just doesn't match" rather than crash
-// detection for the whole scan.
 function compileRegex(pattern) {
-  try {
-    return new RegExp(pattern, "i");
-  } catch {
-    return null;
+  try { return new RegExp(pattern, "i"); } catch { return null; }
+}
+
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// Levenshtein distance for fuzzy matching
+function levenshtein(a, b) {
+  if (a.length === 0) return b.length;
+  if (b.length === 0) return a.length;
+  const matrix = Array.from(new Array(a.length + 1), () => new Array(b.length + 1).fill(0));
+  for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
+  for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      matrix[i][j] = Math.min(matrix[i - 1][j] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j - 1] + cost);
+    }
   }
+  return matrix[a.length][b.length];
+}
+
+function getBasename(path) {
+  return path.split(/[\\/]/).pop();
 }
 
 export function runDetections(report, rules) {
@@ -63,15 +63,18 @@ export function runDetections(report, rules) {
 
     if (rule.type === "filename") {
       const needle = rule.match.toLowerCase();
-      const hit = names.find((n) => n.includes(needle));
+      // Improved filename logic to reduce false positives
+      // Check if it matches the exact basename, or is a distinct word in the path
+      const regex = new RegExp(`(^|[\\\\/\\s_-])${escapeRegExp(needle)}([\\\\/\\s_\\.-]|$)`, "i");
+      
+      const hit = names.find((n) => {
+        const base = getBasename(n);
+        if (base === needle || base === needle + '.exe' || base === needle + '.dll') return true;
+        return regex.test(n);
+      });
+      
       if (hit) {
-        detections.push({
-          ruleId: rule.id,
-          name: rule.name,
-          severity: rule.severity,
-          evidence: hit,
-          note: rule.note,
-        });
+        detections.push({ ruleId: rule.id, name: rule.name, severity: rule.severity, evidence: hit, note: rule.note });
       }
     }
 
@@ -79,37 +82,31 @@ export function runDetections(report, rules) {
       const re = compileRegex(rule.match);
       const hit = re ? names.find((n) => re.test(n)) : null;
       if (hit) {
-        detections.push({
-          ruleId: rule.id,
-          name: rule.name,
-          severity: rule.severity,
-          evidence: hit,
-          note: rule.note,
-        });
+        detections.push({ ruleId: rule.id, name: rule.name, severity: rule.severity, evidence: hit, note: rule.note });
+      }
+    }
+
+    if (rule.type === "fuzzy") {
+      const needle = rule.match.toLowerCase();
+      const threshold = rule.match.length > 5 ? 2 : 1; // 1 or 2 typos allowed
+      const hit = names.find((n) => {
+         const base = getBasename(n).replace(/\.(exe|dll|sys|bin)$/, '');
+         return Math.abs(base.length - needle.length) <= threshold && levenshtein(base, needle) <= threshold;
+      });
+      if (hit) {
+        detections.push({ ruleId: rule.id, name: rule.name, severity: rule.severity, evidence: hit, note: rule.note });
       }
     }
 
     if (rule.type === "hash") {
       const needle = rule.match.toLowerCase().trim();
       if (hashes.includes(needle)) {
-        detections.push({
-          ruleId: rule.id,
-          name: rule.name,
-          severity: rule.severity,
-          evidence: needle,
-          note: rule.note,
-        });
+        detections.push({ ruleId: rule.id, name: rule.name, severity: rule.severity, evidence: needle, note: rule.note });
       }
     }
 
     if (rule.type === "warning" && warningCodes.has(rule.match)) {
-      detections.push({
-        ruleId: rule.id,
-        name: rule.name,
-        severity: rule.severity,
-        evidence: rule.match,
-        note: rule.note,
-      });
+      detections.push({ ruleId: rule.id, name: rule.name, severity: rule.severity, evidence: rule.match, note: rule.note });
     }
   }
 

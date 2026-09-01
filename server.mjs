@@ -342,6 +342,38 @@ app.post('/api/scan', scanLimiter, requireClientSecret, async (req, res) => {
     };
     await saveScan(finalPin, finalReport);
     await markSessionUsed(sessionCode);
+    
+    // Discord Webhook integration
+    if (verdict !== 'clean') {
+      const settings = await getSettings();
+      if (settings.discordWebhookUrl) {
+        const color = verdict === 'cheating' ? 15158332 : 15105570; // red : yellow
+        const embed = {
+          title: `Yeni Şüpheli Tarama Sonucu: ${verdict.toUpperCase()}`,
+          color: color,
+          fields: [
+            { name: 'Kod (Pin)', value: finalPin, inline: true },
+            { name: 'Makine ID', value: machineId, inline: true },
+            { name: 'Oyun', value: finalReport.game, inline: true },
+            { name: 'Tespit Sayısı', value: detections.length.toString(), inline: false }
+          ],
+          timestamp: new Date().toISOString()
+        };
+        
+        // Add top 5 detections to the embed
+        if (detections.length > 0) {
+           const detText = detections.slice(0, 5).map(d => `**${d.name}** (${d.severity})`).join('\n');
+           embed.fields.push({ name: 'İlk Tespitler', value: detText, inline: false });
+        }
+        
+        fetch(settings.discordWebhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ embeds: [embed] })
+        }).catch(e => console.error('Webhook gönderme hatası:', e.message));
+      }
+    }
+
     res.status(201).json({ ok: true, pin: finalPin, verdict });
   } catch (err) {
     console.error('Scan submit error:', err);
@@ -388,6 +420,53 @@ app.get('/api/sessions/:code', apiLimiter, requireClientSecret, async (req, res)
   }
   // 'valid: true' is required by ApiClient.cs (C# client reads this field)
   res.json({ valid: true, ok: true, game: session.game });
+});
+
+app.get('/api/download/:code', async (req, res) => {
+  const code = req.params.code;
+  const session = await getSession(code);
+  
+  if (!isSessionUsable(session)) {
+    return res.status(403).send(`
+      <!DOCTYPE html>
+      <html lang="tr">
+      <head>
+        <meta charset="utf-8">
+        <title>Bağlantı Geçersiz</title>
+        <style>
+          body { background: #0b0d10; color: #e7ebee; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+          .card { background: #14181c; border: 1px solid #262c32; padding: 30px; border-radius: 8px; text-align: center; max-width: 400px; }
+          h2 { color: #e5484d; margin-top: 0; }
+          p { color: #8b96a1; line-height: 1.5; }
+        </style>
+      </head>
+      <body>
+        <div class="card">
+          <h2>İndirme Süresi Doldu</h2>
+          <p>Bu indirme bağlantısının süresi dolmuş veya tarama zaten tamamlanmış. Eğer henüz taranmadıysanız yetkiliden yeni bir bağlantı isteyin.</p>
+        </div>
+      </body>
+      </html>
+    `);
+  }
+  
+  // If EXE_DOWNLOAD_URL is set (e.g. a GitHub Releases link), redirect there.
+  // This is the recommended approach when hosting on Render/Railway since
+  // the exe is too large (161MB) to include in the git repo.
+  const exeUrl = process.env.EXE_DOWNLOAD_URL;
+  if (exeUrl) {
+    return res.redirect(302, exeUrl);
+  }
+
+  // Fallback: serve from local bin/ directory (only works when running locally)
+  const exePath = path.join(__dirname, 'bin', 'MistAC.exe');
+  res.download(exePath, `MistScanner-${code}.exe`, (err) => {
+    if (err) {
+      if (!res.headersSent) {
+        res.status(500).send('EXE_DOWNLOAD_URL env değişkeni tanımlanmamış ve yerel dosya bulunamadı. Lütfen Render ortam değişkenlerini kontrol edin.');
+      }
+    }
+  });
 });
 
 app.post('/api/sessions/:code/progress', apiLimiter, requireClientSecret, async (req, res) => {
