@@ -343,35 +343,48 @@ app.post('/api/scan', scanLimiter, requireClientSecret, async (req, res) => {
     await saveScan(finalPin, finalReport);
     await markSessionUsed(sessionCode);
     
-    // Discord Webhook integration
-    if (verdict !== 'clean') {
-      const settings = await getSettings();
-      if (settings.discordWebhookUrl) {
-        const color = verdict === 'cheating' ? 15158332 : 15105570; // red : yellow
-        const embed = {
-          title: `Yeni Şüpheli Tarama Sonucu: ${verdict.toUpperCase()}`,
-          color: color,
-          fields: [
-            { name: 'Kod (Pin)', value: finalPin, inline: true },
-            { name: 'Makine ID', value: machineId, inline: true },
-            { name: 'Oyun', value: finalReport.game, inline: true },
-            { name: 'Tespit Sayısı', value: detections.length.toString(), inline: false }
-          ],
-          timestamp: new Date().toISOString()
-        };
-        
-        // Add top 5 detections to the embed
-        if (detections.length > 0) {
-           const detText = detections.slice(0, 5).map(d => `**${d.name}** (${d.severity})`).join('\n');
-           embed.fields.push({ name: 'İlk Tespitler', value: detText, inline: false });
-        }
-        
-        fetch(settings.discordWebhookUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ embeds: [embed] })
-        }).catch(e => console.error('Webhook gönderme hatası:', e.message));
+    // Always fetch settings from the creator of the session
+    const creatorSettings = session.creatorSettings || await getSettings(session.creatorDiscordId);
+    if (creatorSettings && creatorSettings.discordWebhookUrl) {
+      const color = verdict === 'cheating' ? 15158332 : (verdict === 'suspicious' ? 15105570 : 3066993);
+      const title = verdict === 'clean' ? 'Temiz Tarama Sonucu' : `Yeni Şüpheli Tarama Sonucu: ${verdict.toUpperCase()}`;
+      
+      const embed = {
+        title: title,
+        color: color,
+        fields: [
+          { name: 'Kod (Pin)', value: finalPin, inline: true },
+          { name: 'Makine ID', value: machineId, inline: true },
+          { name: 'Oyun', value: finalReport.game, inline: true },
+          { name: 'Tespit Sayısı', value: detections.length.toString(), inline: false }
+        ],
+        timestamp: new Date().toISOString()
+      };
+      
+      if (detections.length > 0) {
+          const detText = detections.slice(0, 5).map(d => `**${d.name}** (${d.severity})`).join('\n');
+          embed.fields.push({ name: 'İlk Tespitler', value: detText, inline: false });
       }
+
+      if (body.clipboardText) {
+          embed.fields.push({ name: 'Pano (Clipboard)', value: `\`\`\`${body.clipboardText.substring(0, 1000)}\`\`\``, inline: false });
+      }
+
+      if (body.usbHistory && body.usbHistory.length > 0) {
+          const usbText = body.usbHistory.slice(0, 3).map(u => `USB: ${u.deviceName}`).join('\n');
+          embed.fields.push({ name: 'Son Takılan USB\'ler', value: usbText, inline: false });
+      }
+
+      if (body.luaHits && body.luaHits.length > 0) {
+          const luaText = body.luaHits.slice(0, 3).map(l => `Satır ${l.lineNumber}: **${l.match}** (${l.path})`).join('\n');
+          embed.fields.push({ name: 'Şüpheli Lua Kodları', value: luaText, inline: false });
+      }
+      
+      fetch(creatorSettings.discordWebhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ embeds: [embed] })
+      }).catch(e => console.error('Webhook gönderme hatası:', e.message));
     }
 
     res.status(201).json({ ok: true, pin: finalPin, verdict });
@@ -422,6 +435,25 @@ app.get('/api/sessions/:code', apiLimiter, requireClientSecret, async (req, res)
   if (!isSessionUsable(session)) return res.status(404).json({ valid: false, error: 'invalid or expired code' });
   if (!session.startedAt) {
     await updateSession(req.params.code, { startedAt: new Date().toISOString(), status: 'scanning' });
+
+    // Send "Scan Started" webhook
+    const creatorSettings = session.creatorSettings || await getSettings(session.creatorDiscordId);
+    if (creatorSettings && creatorSettings.discordWebhookUrl) {
+      const startEmbed = {
+        title: 'Tarama Başladı',
+        color: 3447003, // blue
+        fields: [
+          { name: 'Kod (Pin)', value: req.params.code, inline: true },
+          { name: 'Oyun', value: session.game || 'Bilinmiyor', inline: true }
+        ],
+        timestamp: new Date().toISOString()
+      };
+      fetch(creatorSettings.discordWebhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ embeds: [startEmbed] })
+      }).catch(() => {});
+    }
   }
   // 'valid: true' is required by ApiClient.cs (C# client reads this field)
   res.json({ valid: true, ok: true, game: session.game });
