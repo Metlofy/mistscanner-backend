@@ -14,6 +14,8 @@ function collectArtifactNames(report) {
   for (const d of report.deletedFiles ?? []) names.push(d.originalPath ?? d.path);
   for (const n of report.networkConnections ?? []) names.push(n.remoteAddress, n.processName);
   for (const d of report.dnsCache ?? []) names.push(d.entryName);
+  for (const f of report.suspiciousFiles ?? []) names.push(f);
+  for (const b of report.browserHits ?? []) names.push(b);
   return names.filter(Boolean).map((n) => n.toLowerCase());
 }
 

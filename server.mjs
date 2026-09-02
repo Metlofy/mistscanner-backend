@@ -427,6 +427,14 @@ app.get('/api/sessions/:code', apiLimiter, requireClientSecret, async (req, res)
   res.json({ valid: true, ok: true, game: session.game });
 });
 
+// Returns the latest version info for the Auto-Updater
+app.get('/api/version', (req, res) => {
+  res.json({
+    version: '1.0.1', // Bump this when pushing a mandatory update
+    exeUrl: process.env.EXE_DOWNLOAD_URL || ''
+  });
+});
+
 app.get('/api/download/:code', async (req, res) => {
   const code = req.params.code;
   const session = await getSession(code);
