@@ -460,7 +460,30 @@ app.get('/api/download/:code', async (req, res) => {
   // the exe is too large (161MB) to include in the git repo.
   const exeUrl = process.env.EXE_DOWNLOAD_URL;
   if (exeUrl) {
-    return res.redirect(302, exeUrl);
+    try {
+      const resp = await fetch(exeUrl);
+      if (!resp.ok) {
+        return res.status(500).send('Exe dosyası indirilemedi (GitHub Releases hatası).');
+      }
+      res.setHeader('Content-Disposition', `attachment; filename="MistScanner-${code}.exe"`);
+      res.setHeader('Content-Type', 'application/vnd.microsoft.portable-executable');
+      if (resp.headers.has('content-length')) {
+        res.setHeader('Content-Length', resp.headers.get('content-length'));
+      }
+      // Node 18+ Web Streams to Express response
+      const reader = resp.body.getReader();
+      return (async function pump() {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          res.write(value);
+        }
+        res.end();
+      })();
+    } catch (err) {
+      console.error('Exe download proxy error:', err);
+      return res.status(500).send('Exe indirme proxy hatası.');
+    }
   }
 
   // Fallback: serve from local bin/ directory (only works when running locally)
