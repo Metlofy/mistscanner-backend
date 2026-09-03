@@ -6,6 +6,7 @@ import cors from "cors";
 import crypto from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { readFile, writeFile, mkdir } from "node:fs/promises";
 import {
   saveScan, getScan, listScans, getRules, addRule, addRules, updateRule, deleteRule,
   appendAudit, getAudit, createSession, getSession, markSessionUsed, updateSession,
@@ -115,6 +116,13 @@ async function requireActiveKey(req, res, next) {
   if (req.user?.discordId === OWNER_DISCORD_ID) return next();
   const keys = await listLicenseKeys();
   const now = new Date();
+  // Check if user has a revoked key first
+  const revokedKey = keys.find(k =>
+    k.activatedBy === req.user.discordId && k.status === 'revoked'
+  );
+  if (revokedKey) {
+    return res.status(403).json({ error: 'key_revoked', code: 'KEY_REVOKED' });
+  }
   const activeKey = keys.find(k =>
     k.activatedBy === req.user.discordId &&
     k.status === 'active' &&
@@ -251,8 +259,15 @@ app.delete('/api/owner/keys/:code', requireAuth, requireOwner, async (req, res) 
 app.post('/api/owner/keys/:code/revoke', requireAuth, requireOwner, async (req, res) => {
   const key = await getLicenseKey(req.params.code);
   if (!key) return res.status(404).json({ error: 'key not found' });
-  const updated = await updateLicenseKey(req.params.code, { status: 'revoked' });
-  await appendAudit({ action: 'license_key_revoked', code: req.params.code, by: req.user.discordId });
+  const updated = await updateLicenseKey(req.params.code, { status: 'revoked', revokedAt: new Date().toISOString(), revokedBy: req.user.discordId });
+  await appendAudit({ 
+    action: 'license_key_revoked', 
+    code: req.params.code, 
+    label: key.label, 
+    targetDiscordId: key.targetDiscordId, 
+    activatedBy: key.activatedByUsername,
+    by: req.user.discordUsername 
+  });
   res.json(updated);
 });
 
@@ -303,7 +318,10 @@ app.get('/api/keys/my', requireAuth, async (req, res) => {
     return res.json({ isOwner: true, key: null });
   }
   const keys = await listLicenseKeys();
-  const myKey = keys.find(k => k.activatedBy === req.user.discordId && k.status === 'active');
+  const myKey = keys.find(k => k.activatedBy === req.user.discordId && (k.status === 'active' || k.status === 'revoked'));
+  if (myKey?.status === 'revoked') {
+    return res.json({ key: myKey, revoked: true });
+  }
   if (myKey && new Date(myKey.expiresAt) < new Date()) {
     await updateLicenseKey(myKey.code, { status: 'expired' });
     return res.json({ key: null });
@@ -674,6 +692,34 @@ app.get('/api/client-settings/:code', apiLimiter, requireClientSecret, async (re
     return res.json(session.creatorSettings);
   }
   res.json(await getSettings());
+});
+
+// ---- Maintenance Mode ----------------------------------------------------
+// Stored as a global flag in data/maintenance.json
+const MAINTENANCE_FILE = path.join(path.dirname(fileURLToPath(import.meta.url)), 'data', 'maintenance.json');
+
+async function getMaintenanceMode() {
+  try {
+    const raw = await readFile(MAINTENANCE_FILE, 'utf8');
+    return JSON.parse(raw);
+  } catch { return { enabled: false }; }
+}
+async function setMaintenanceMode(val) {
+  try { await mkdir(path.dirname(MAINTENANCE_FILE), { recursive: true }); } catch {}
+  await writeFile(MAINTENANCE_FILE, JSON.stringify(val, null, 2));
+}
+
+// Anyone can check maintenance status (used before login to show maintenance page)
+app.get('/api/maintenance', async (_req, res) => {
+  res.json(await getMaintenanceMode());
+});
+
+// Only owner can toggle maintenance mode
+app.post('/api/maintenance', requireAuth, requireOwner, async (req, res) => {
+  const { enabled } = req.body ?? {};
+  await setMaintenanceMode({ enabled: !!enabled, updatedAt: new Date().toISOString() });
+  await appendAudit({ action: enabled ? 'maintenance_enabled' : 'maintenance_disabled', by: req.user.discordId });
+  res.json({ ok: true, enabled: !!enabled });
 });
 
 app.get('/api/health', (req, res) => res.json({ ok: true, version: '1.0.0' }));
