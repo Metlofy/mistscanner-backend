@@ -31,25 +31,25 @@ async function init() {
   await fs.mkdir(DATA_DIR, { recursive: true });
   await ensureFile(SCANS_FILE, {});
   const defaultRules = [
-    { id: crypto.randomUUID(), type: 'filename', match: 'cheat', severity: 'high', name: 'Genel Hile Kelimesi', note: 'Dosya adında cheat geçiyor', enabled: true, createdAt: new Date().toISOString() },
-    { id: crypto.randomUUID(), type: 'filename', match: 'hack', severity: 'high', name: 'Genel Hile Kelimesi', note: 'Dosya adında hack geçiyor', enabled: true, createdAt: new Date().toISOString() },
-    { id: crypto.randomUUID(), type: 'filename', match: 'injector', severity: 'high', name: 'Injector', note: 'Injector programı tespit edildi', enabled: true, createdAt: new Date().toISOString() },
-    { id: crypto.randomUUID(), type: 'filename', match: 'skript', severity: 'medium', name: 'Script/Makro', note: 'Script veya makro programı', enabled: true, createdAt: new Date().toISOString() },
-    { id: crypto.randomUUID(), type: 'filename', match: 'bypass', severity: 'high', name: 'Anti-Cheat Bypass', note: 'Bypass aracı tespit edildi', enabled: true, createdAt: new Date().toISOString() },
-    { id: crypto.randomUUID(), type: 'filename', match: 'dumper', severity: 'high', name: 'Dumper', note: 'Oyun hafızasını okuyan dumper aracı', enabled: true, createdAt: new Date().toISOString() },
-    { id: crypto.randomUUID(), type: 'filename', match: 'aimbot', severity: 'high', name: 'Aimbot', note: 'Aimbot yazılımı', enabled: true, createdAt: new Date().toISOString() },
-    { id: crypto.randomUUID(), type: 'filename', match: 'wallhack', severity: 'high', name: 'Wallhack', note: 'Wallhack yazılımı', enabled: true, createdAt: new Date().toISOString() },
-    { id: crypto.randomUUID(), type: 'filename', match: 'esp', severity: 'medium', name: 'ESP', note: 'ESP/Wallhack yazılımı', enabled: true, createdAt: new Date().toISOString() },
-    { id: crypto.randomUUID(), type: 'filename', match: 'mod menu', severity: 'high', name: 'Mod Menü', note: 'Oyun içi mod menü tespit edildi', enabled: true, createdAt: new Date().toISOString() },
-    { id: crypto.randomUUID(), type: 'filename', match: 'eulen', severity: 'high', name: 'Eulen (FiveM)', note: 'Popüler FiveM Hilesi: Eulen', enabled: true, createdAt: new Date().toISOString() },
-    { id: crypto.randomUUID(), type: 'filename', match: 'hx', severity: 'high', name: 'HX (FiveM)', note: 'Popüler FiveM Hilesi: HX', enabled: true, createdAt: new Date().toISOString() },
-    { id: crypto.randomUUID(), type: 'filename', match: 'redengine', severity: 'high', name: 'RedEngine (FiveM)', note: 'Popüler FiveM Hilesi: RedEngine', enabled: true, createdAt: new Date().toISOString() },
-    { id: crypto.randomUUID(), type: 'filename', match: 'lunia', severity: 'high', name: 'Lunia (FiveM)', note: 'Popüler FiveM Hilesi: Lunia', enabled: true, createdAt: new Date().toISOString() },
-    { id: crypto.randomUUID(), type: 'filename', match: 'crown', severity: 'high', name: 'Crown (FiveM)', note: 'Popüler FiveM Hilesi: Crown', enabled: true, createdAt: new Date().toISOString() },
-    { id: crypto.randomUUID(), type: 'filename', match: 'nexus', severity: 'high', name: 'Nexus (FiveM)', note: 'Popüler FiveM Hilesi: Nexus', enabled: true, createdAt: new Date().toISOString() },
-    { id: crypto.randomUUID(), type: 'filename', match: 'tz', severity: 'high', name: 'TZ Project (FiveM)', note: 'Popüler FiveM Hilesi: TZ Project', enabled: true, createdAt: new Date().toISOString() },
-    { id: crypto.randomUUID(), type: 'filename', match: '.rpf', severity: 'medium', name: 'Modifiye RPF', note: 'Modlanmış RPF dosyası tespiti (.rpf)', enabled: true, createdAt: new Date().toISOString() },
-    { id: crypto.randomUUID(), type: 'regex', match: '\\.rpf$', severity: 'medium', name: 'RPF Dosyası Uzantısı', note: 'RPF (RAGE Package Format) dosyası uzantısı taraması', enabled: true, createdAt: new Date().toISOString() }
+    { id: crypto.randomUUID(), type: 'filename', match: 'cheat', severity: 'high', name: 'Genel Hile Kelimesi', note: 'Dosya adında cheat geçiyor', enabled: true, system: true, createdAt: new Date().toISOString() },
+    { id: crypto.randomUUID(), type: 'filename', match: 'hack', severity: 'high', name: 'Genel Hile Kelimesi', note: 'Dosya adında hack geçiyor', enabled: true, system: true, createdAt: new Date().toISOString() },
+    { id: crypto.randomUUID(), type: 'filename', match: 'injector', severity: 'high', name: 'Injector', note: 'Injector programı tespit edildi', enabled: true, system: true, createdAt: new Date().toISOString() },
+    { id: crypto.randomUUID(), type: 'filename', match: 'skript', severity: 'medium', name: 'Script/Makro', note: 'Script veya makro programı', enabled: true, system: true, createdAt: new Date().toISOString() },
+    { id: crypto.randomUUID(), type: 'filename', match: 'bypass', severity: 'high', name: 'Anti-Cheat Bypass', note: 'Bypass aracı tespit edildi', enabled: true, system: true, createdAt: new Date().toISOString() },
+    { id: crypto.randomUUID(), type: 'filename', match: 'dumper', severity: 'high', name: 'Dumper', note: 'Oyun hafızasını okuyan dumper aracı', enabled: true, system: true, createdAt: new Date().toISOString() },
+    { id: crypto.randomUUID(), type: 'filename', match: 'aimbot', severity: 'high', name: 'Aimbot', note: 'Aimbot yazılımı', enabled: true, system: true, createdAt: new Date().toISOString() },
+    { id: crypto.randomUUID(), type: 'filename', match: 'wallhack', severity: 'high', name: 'Wallhack', note: 'Wallhack yazılımı', enabled: true, system: true, createdAt: new Date().toISOString() },
+    { id: crypto.randomUUID(), type: 'filename', match: 'esp', severity: 'medium', name: 'ESP', note: 'ESP/Wallhack yazılımı', enabled: true, system: true, createdAt: new Date().toISOString() },
+    { id: crypto.randomUUID(), type: 'filename', match: 'mod menu', severity: 'high', name: 'Mod Menü', note: 'Oyun içi mod menü tespit edildi', enabled: true, system: true, createdAt: new Date().toISOString() },
+    { id: crypto.randomUUID(), type: 'filename', match: 'eulen', severity: 'high', name: 'Eulen (FiveM)', note: 'Popüler FiveM Hilesi: Eulen', enabled: true, system: true, createdAt: new Date().toISOString() },
+    { id: crypto.randomUUID(), type: 'filename', match: 'hx', severity: 'high', name: 'HX (FiveM)', note: 'Popüler FiveM Hilesi: HX', enabled: true, system: true, createdAt: new Date().toISOString() },
+    { id: crypto.randomUUID(), type: 'filename', match: 'redengine', severity: 'high', name: 'RedEngine (FiveM)', note: 'Popüler FiveM Hilesi: RedEngine', enabled: true, system: true, createdAt: new Date().toISOString() },
+    { id: crypto.randomUUID(), type: 'filename', match: 'lunia', severity: 'high', name: 'Lunia (FiveM)', note: 'Popüler FiveM Hilesi: Lunia', enabled: true, system: true, createdAt: new Date().toISOString() },
+    { id: crypto.randomUUID(), type: 'filename', match: 'crown', severity: 'high', name: 'Crown (FiveM)', note: 'Popüler FiveM Hilesi: Crown', enabled: true, system: true, createdAt: new Date().toISOString() },
+    { id: crypto.randomUUID(), type: 'filename', match: 'nexus', severity: 'high', name: 'Nexus (FiveM)', note: 'Popüler FiveM Hilesi: Nexus', enabled: true, system: true, createdAt: new Date().toISOString() },
+    { id: crypto.randomUUID(), type: 'filename', match: 'tz', severity: 'high', name: 'TZ Project (FiveM)', note: 'Popüler FiveM Hilesi: TZ Project', enabled: true, system: true, createdAt: new Date().toISOString() },
+    { id: crypto.randomUUID(), type: 'filename', match: '.rpf', severity: 'medium', name: 'Modifiye RPF', note: 'Modlanmış RPF dosyası tespiti (.rpf)', enabled: true, system: true, createdAt: new Date().toISOString() },
+    { id: crypto.randomUUID(), type: 'regex', match: '\\.rpf$', severity: 'medium', name: 'RPF Dosyası Uzantısı', note: 'RPF (RAGE Package Format) dosyası uzantısı taraması', enabled: true, system: true, createdAt: new Date().toISOString() }
   ];
   await ensureFile(RULES_FILE, defaultRules);   // Render'da data/ klasörü olmadığı için burada oluştur ve kuralları ekle
   await ensureFile(AUDIT_FILE, []);

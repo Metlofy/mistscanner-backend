@@ -336,6 +336,7 @@ app.post('/api/scan', scanLimiter, requireClientSecret, async (req, res) => {
       createdAt: new Date().toISOString(),
       scanDurationMs: body.scanDurationMs || 0,
       submittedBy: session.createdBy || body.submittedBy || 'client',
+      creatorDiscordId: session.creatorDiscordId,
       ...body,
       detections,   // Detection nesneleri dizisi
       verdict,      // 'clean' | 'suspicious' | 'cheating'
@@ -420,10 +421,16 @@ app.post('/api/sessions', apiLimiter, requireAuth, requireActiveKey, async (req,
 });
 
 app.get('/api/sessions', apiLimiter, requireAuth, requireActiveKey, async (req, res) => {
-  res.json(await listSessions());
+  const all = await listSessions();
+  const filtered = all.filter(s => s.creatorDiscordId === req.user.discordId);
+  res.json(filtered);
 });
 
 app.delete('/api/sessions/:code', apiLimiter, requireAuth, requireActiveKey, async (req, res) => {
+  const session = await getSession(req.params.code);
+  if (session && session.creatorDiscordId !== req.user.discordId) {
+    return res.status(403).json({ error: 'forbidden' });
+  }
   const ok = await deleteSession(req.params.code);
   if (!ok) return res.status(404).json({ error: 'not found' });
   await appendAudit({ action: 'session_deleted', pin: req.params.code, by: req.user.discordUsername });
@@ -549,6 +556,9 @@ app.post('/api/sessions/:code/progress', apiLimiter, requireClientSecret, async 
 app.get('/api/pin/:pin', apiLimiter, requireAuth, requireActiveKey, async (req, res) => {
   const rep = await getScan(req.params.pin);
   if (!rep) return res.status(404).json({ error: 'scan not found' });
+  if (rep.creatorDiscordId && rep.creatorDiscordId !== req.user.discordId) {
+    return res.status(403).json({ error: 'forbidden' });
+  }
   res.json(rep);
 });
 
@@ -565,21 +575,26 @@ app.post('/api/pin/:pin/decision', apiLimiter, requireAuth, requireActiveKey, as
 
 app.get('/api/scans', apiLimiter, requireAuth, requireActiveKey, async (req, res) => {
   const all = await listScans();
-  const sum = all.map(s => ({
-    pin: s.pin,
-    game: s.game,
-    machineId: s.machineId,
-    createdAt: s.createdAt,
-    detectionCount: s.detections?.length || 0,
-    verdict: s.verdict,
-    staffDecision: s.staffDecision,
-    submittedBy: s.submittedBy,
-  }));
+  const sum = all
+    .filter(s => s.creatorDiscordId === req.user.discordId)
+    .map(s => ({
+      pin: s.pin,
+      game: s.game,
+      machineId: s.machineId,
+      createdAt: s.createdAt,
+      detectionCount: s.detections?.length || 0,
+      verdict: s.verdict,
+      staffDecision: s.staffDecision,
+      submittedBy: s.submittedBy,
+    }));
   res.json(sum);
 });
 
 app.get('/api/rules', apiLimiter, requireAuth, requireActiveKey, async (req, res) => {
-  res.json(await getRules());
+  const all = await getRules();
+  // Show system (built-in) rules + rules this user created
+  const filtered = all.filter(r => r.system === true || r.creatorDiscordId === req.user.discordId);
+  res.json(filtered);
 });
 
 app.post('/api/rules', apiLimiter, requireAuth, requireActiveKey, async (req, res) => {
@@ -587,6 +602,8 @@ app.post('/api/rules', apiLimiter, requireAuth, requireActiveKey, async (req, re
   if (!type || !match || !severity || !name) return res.status(400).json({ error: 'missing fields' });
   const rule = await addRule({
     id: crypto.randomUUID(), type, match, severity, name, note: note || '', enabled: true,
+    creatorDiscordId: req.user.discordId,
+    createdAt: new Date().toISOString(),
   });
   await appendAudit({ action: 'rule_added', by: req.user.discordUsername });
   res.status(201).json(rule);
@@ -598,6 +615,8 @@ app.post('/api/rules/import', apiLimiter, requireAuth, requireActiveKey, async (
   
   const existing = await getRules();
   const parsed = parseRuleImport(text, sourceFileName, existing);
+  // Tag imported rules with this user's ID
+  parsed.created = parsed.created.map(r => ({ ...r, creatorDiscordId: req.user.discordId }));
   if (parsed.created.length > 0) await addRules(parsed.created);
   if (parsed.created.length > 0) {
     await appendAudit({ action: 'rule_imported', by: req.user.discordUsername });
@@ -606,6 +625,12 @@ app.post('/api/rules/import', apiLimiter, requireAuth, requireActiveKey, async (
 });
 
 app.patch('/api/rules/:id', apiLimiter, requireAuth, requireActiveKey, async (req, res) => {
+  const all = await getRules();
+  const rule = all.find(r => r.id === req.params.id);
+  // Only allow editing own rules (system rules cannot be modified)
+  if (!rule) return res.status(404).json({ error: 'rule not found' });
+  if (rule.system && !req.user.isOwner) return res.status(403).json({ error: 'cannot modify system rule' });
+  if (!rule.system && rule.creatorDiscordId !== req.user.discordId) return res.status(403).json({ error: 'forbidden' });
   const r = await updateRule(req.params.id, req.body);
   if (!r) return res.status(404).json({ error: 'rule not found' });
   await appendAudit({ action: 'rule_updated', by: req.user.discordUsername });
@@ -613,6 +638,11 @@ app.patch('/api/rules/:id', apiLimiter, requireAuth, requireActiveKey, async (re
 });
 
 app.delete('/api/rules/:id', apiLimiter, requireAuth, requireActiveKey, async (req, res) => {
+  const all = await getRules();
+  const rule = all.find(r => r.id === req.params.id);
+  if (!rule) return res.status(404).json({ error: 'rule not found' });
+  if (rule.system) return res.status(403).json({ error: 'cannot delete system rule' });
+  if (rule.creatorDiscordId !== req.user.discordId) return res.status(403).json({ error: 'forbidden' });
   const ok = await deleteRule(req.params.id);
   if (!ok) return res.status(404).json({ error: 'rule not found' });
   await appendAudit({ action: 'rule_deleted', by: req.user.discordUsername });
