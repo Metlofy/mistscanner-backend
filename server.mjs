@@ -667,6 +667,45 @@ app.delete('/api/rules/:id', apiLimiter, requireAuth, requireActiveKey, async (r
   res.status(204).end();
 });
 
+// Leaderboard - tüm kullanıcıların tarama performansını döndürür (sadece auth gerekli, Free dahil)
+app.get('/api/leaderboard', apiLimiter, requireAuth, async (req, res) => {
+  try {
+    const [all, authSessions] = await Promise.all([
+      listScans(),
+      // Build a lookup: discordId -> {username, avatar}
+      (async () => {
+        const { promises: fs } = await import('node:fs');
+        try {
+          const raw = await fs.readFile(path.join(__dirname, 'data', 'auth_sessions.json'), 'utf-8');
+          const sessions = Object.values(JSON.parse(raw));
+          const map = {};
+          for (const s of sessions) {
+            if (s.discordId && !map[s.discordId]) {
+              map[s.discordId] = { name: s.discordGlobalName || s.discordUsername, avatar: s.discordAvatar };
+            }
+          }
+          return map;
+        } catch { return {}; }
+      })()
+    ]);
+
+    const leaderScans = all.map(s => {
+      const userInfo = authSessions[s.creatorDiscordId] || {};
+      return {
+        createdAt: s.createdAt,
+        creatorDiscordId: s.creatorDiscordId || null,
+        creatorDiscordUsername: userInfo.name || s.submittedBy || null,
+        creatorDiscordAvatar: userInfo.avatar || null,
+        detectionCount: s.detections?.length || 0,
+        staffDecision: s.staffDecision ? { decision: s.staffDecision.decision } : null,
+      };
+    });
+    res.json({ scans: leaderScans });
+  } catch(err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 app.get('/api/audit', apiLimiter, requireAuth, requireOwner, async (req, res) => {
   res.json(await getAudit());
 });
