@@ -610,8 +610,8 @@ app.get('/api/scans', apiLimiter, requireAuth, requireActiveKey, async (req, res
 
 app.get('/api/rules', apiLimiter, requireAuth, requireActiveKey, async (req, res) => {
   const all = await getRules();
-  // Show system (built-in) rules + rules this user created
-  const filtered = all.filter(r => r.system === true || r.creatorDiscordId === req.user.discordId);
+  // Only show rules this user created (hide built-in system rules from dashboard)
+  const filtered = all.filter(r => r.creatorDiscordId === req.user.discordId);
   res.json(filtered);
 });
 
