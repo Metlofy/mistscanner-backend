@@ -36,7 +36,8 @@ app.use(cors({
   origin: (origin, cb) => cb(null, true),
   credentials: true,
 }));
-app.use(express.json({ limit: "2mb" }));
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 // Dashboard klasörünü backend üzerinden yayınla
 app.use(express.static(path.join(__dirname, '../dashboard')));
@@ -365,40 +366,95 @@ app.post('/api/scan', scanLimiter, requireClientSecret, async (req, res) => {
     // Always fetch settings from the creator of the session
     const creatorSettings = session.creatorSettings || await getSettings(session.creatorDiscordId);
     if (creatorSettings && creatorSettings.discordWebhookUrl) {
+      // --- Rich Webhook ---
       const color = verdict === 'cheating' ? 15158332 : (verdict === 'suspicious' ? 15105570 : 3066993);
-      const title = verdict === 'clean' ? 'Temiz Tarama Sonucu' : `Yeni Şüpheli Tarama Sonucu: ${verdict.toUpperCase()}`;
-      
+      const verdictEmoji = verdict === 'cheating' ? '🚫' : verdict === 'suspicious' ? '⚠️' : '✅';
+      const verdictTr = verdict === 'cheating' ? 'HİLE TESPİT EDİLDİ' : verdict === 'suspicious' ? 'ŞÜPHELİ / UYARI' : 'TEMİZ';
+
       const embed = {
-        title: title,
-        color: color,
-        fields: [
-          { name: 'Kod (Pin)', value: finalPin, inline: true },
-          { name: 'Makine ID', value: machineId, inline: true },
-          { name: 'Oyun', value: finalReport.game, inline: true },
-          { name: 'Tespit Sayısı', value: detections.length.toString(), inline: false }
-        ],
+        title: `${verdictEmoji} Tarama Sonucu: ${verdictTr}`,
+        color,
+        description: [
+          `**📌 PIN:** \`${finalPin}\``,
+          `**🖥️ Makine ID:** \`${machineId}\``,
+          `**🎮 Oyun:** ${finalReport.game}`,
+          `**⏱️ Süre:** ${body.scanDurationMs || 0}ms`,
+          `**👤 Gönderen:** ${session.createdBy || 'bilinmiyor'}`,
+          `**🕒 Tarih:** ${new Date().toLocaleString('tr-TR')}`,
+        ].join('\n'),
+        fields: [],
+        footer: { text: 'Mist Scanner • Adli İnceleme Sistemi' },
         timestamp: new Date().toISOString()
       };
-      
+
+      // Detections
       if (detections.length > 0) {
-          const detText = detections.slice(0, 5).map(d => `**${d.name}** (${d.severity})`).join('\n');
-          embed.fields.push({ name: 'İlk Tespitler', value: detText, inline: false });
+        const det = detections.slice(0, 12).map(d =>
+          `\`${d.severity.toUpperCase()}\` **${d.name}** — ${d.type}${d.evidence ? `\n  ↳ \`${String(d.evidence).substring(0,80)}\`` : ''}`
+        ).join('\n');
+        embed.fields.push({ name: `🔍 Tespitler (${detections.length})`, value: det.substring(0, 1024), inline: false });
+      } else {
+        embed.fields.push({ name: '✅ Tespitler', value: 'Herhangi bir hile/şüpheli aktivite bulunamadı.', inline: false });
       }
 
-      if (body.clipboardText) {
-          embed.fields.push({ name: 'Pano (Clipboard)', value: `\`\`\`${body.clipboardText.substring(0, 1000)}\`\`\``, inline: false });
+      // Warnings
+      if (body.warnings && body.warnings.length > 0) {
+        const warn = body.warnings.slice(0, 8).map(w => `⚠️ \`${w.code || w.name || w}\``).join('\n');
+        embed.fields.push({ name: `⚠️ Uyarılar (${body.warnings.length})`, value: warn.substring(0, 1024), inline: false });
       }
 
+      // Processes (suspicious only)
+      if (body.processes && body.processes.length > 0) {
+        const procs = body.processes.slice(0, 15).map(p => `\`${(p.name || p).substring(0, 40)}\``).join(', ');
+        embed.fields.push({ name: `⚙️ Çalışan Süreçler (${body.processes.length})`, value: procs.substring(0, 1024), inline: false });
+      }
+
+      // Prefetch
+      if (body.prefetchFiles && body.prefetchFiles.length > 0) {
+        const pf = body.prefetchFiles.slice(0, 10).map(f => `\`${(typeof f === 'string' ? f : f.name || '').substring(0, 50)}\``).join('\n');
+        embed.fields.push({ name: `📂 Prefetch Dosyaları (${body.prefetchFiles.length})`, value: pf.substring(0, 1024), inline: false });
+      }
+
+      // USB History
       if (body.usbHistory && body.usbHistory.length > 0) {
-          const usbText = body.usbHistory.slice(0, 3).map(u => `USB: ${u.deviceName}`).join('\n');
-          embed.fields.push({ name: 'Son Takılan USB\'ler', value: usbText, inline: false });
+        const usb = body.usbHistory.slice(0, 8).map(u => `🔌 ${u.deviceName || u.FriendlyName || 'USB Aygıt'}${u.lastConnected ? ` — ${u.lastConnected}` : ''}`).join('\n');
+        embed.fields.push({ name: `🔌 USB Geçmişi (${body.usbHistory.length})`, value: usb.substring(0, 1024), inline: false });
       }
 
-      if (body.luaHits && body.luaHits.length > 0) {
-          const luaText = body.luaHits.slice(0, 3).map(l => `Satır ${l.lineNumber}: **${l.match}** (${l.path})`).join('\n');
-          embed.fields.push({ name: 'Şüpheli Lua Kodları', value: luaText, inline: false });
+      // Browser History (suspicious)
+      if (body.browserHistory && body.browserHistory.length > 0) {
+        const bh = body.browserHistory.slice(0, 6).map(h => `🌐 ${(h.url || h).substring(0, 70)}`).join('\n');
+        embed.fields.push({ name: `🌐 Şüpheli Tarayıcı Geçmişi (${body.browserHistory.length})`, value: bh.substring(0, 1024), inline: false });
       }
-      
+
+      // Lua hits
+      if (body.luaHits && body.luaHits.length > 0) {
+        const lua = body.luaHits.slice(0, 6).map(l => `Satır ${l.lineNumber}: **${l.match}** \`${(l.path||'').substring(0,40)}\``).join('\n');
+        embed.fields.push({ name: `📜 Şüpheli Lua Kodları (${body.luaHits.length})`, value: lua.substring(0, 1024), inline: false });
+      }
+
+      // Clipboard
+      if (body.clipboardText && body.clipboardText.trim()) {
+        const clip = body.clipboardText.substring(0, 400).replace(/`/g, "'");
+        embed.fields.push({ name: '📋 Pano İçeriği', value: `\`\`\`${clip}\`\`\``, inline: false });
+      }
+
+      // Amcache / Deleted files
+      if (body.amcache && body.amcache.length > 0) {
+        const am = body.amcache.slice(0, 8).map(a => `\`${(a.name || a).substring(0,50)}\``).join('\n');
+        embed.fields.push({ name: `🗂️ Amcache Kayıtları (${body.amcache.length})`, value: am.substring(0, 1024), inline: false });
+      }
+      if (body.deletedFiles && body.deletedFiles.length > 0) {
+        const del = body.deletedFiles.slice(0, 8).map(d => `\`${(d.name || d).substring(0,50)}\``).join('\n');
+        embed.fields.push({ name: `🗑️ Silinmiş Dosyalar (${body.deletedFiles.length})`, value: del.substring(0, 1024), inline: false });
+      }
+
+      // Loaded Modules (suspicious)
+      if (body.modules && body.modules.length > 0) {
+        const mods = body.modules.filter(m => m.suspicious).slice(0, 8).map(m => `\`${(m.name||m).substring(0,50)}\``).join('\n');
+        if (mods) embed.fields.push({ name: `💉 Şüpheli Yüklü Modüller`, value: mods.substring(0, 1024), inline: false });
+      }
+
       fetch(creatorSettings.discordWebhookUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -608,6 +664,29 @@ app.get('/api/scans', apiLimiter, requireAuth, requireActiveKey, async (req, res
   res.json(sum);
 });
 
+app.get('/api/stats/global', async (req, res) => {
+  try {
+    const files = await fs.readdir(SCANS_DIR);
+    let total = 0, banned = 0, clean = 0, warned = 0, pending = 0;
+    
+    for (const f of files) {
+      if (!f.endsWith('.json')) continue;
+      total++;
+      try {
+        const data = JSON.parse(await fs.readFile(path.join(SCANS_DIR, f), 'utf-8'));
+        const v = data.staffDecision ? data.staffDecision.decision : data.verdict;
+        if (v === 'banned' || v === 'cheating') banned++;
+        else if (v === 'cleared' || v === 'clean') clean++;
+        else if (v === 'warned' || v === 'suspicious') warned++;
+        else pending++;
+      } catch (e) {}
+    }
+    res.json({ total, banned, clean, warned, pending });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to compute stats' });
+  }
+});
+
 app.get('/api/rules', apiLimiter, requireAuth, requireActiveKey, async (req, res) => {
   const all = await getRules();
   // Only show rules this user created (hide built-in system rules from dashboard)
@@ -759,6 +838,44 @@ app.post('/api/maintenance', requireAuth, requireOwner, async (req, res) => {
   await setMaintenanceMode({ enabled: !!enabled, updatedAt: new Date().toISOString() });
   await appendAudit({ action: enabled ? 'maintenance_enabled' : 'maintenance_disabled', by: req.user.discordId });
   res.json({ ok: true, enabled: !!enabled });
+});
+
+// ---- Screenshot/Video Upload -----------------------------------------------
+// C# client sends: { pin, clientSecret, frames: ["base64...", ...] }
+// We store them under data/videos/<pin>.json as raw base64 array.
+// The dashboard hits GET /api/video/:pin to retrieve and build a timelapse.
+
+const VIDEOS_DIR = path.join(__dirname, 'data', 'videos');
+mkdir(VIDEOS_DIR, { recursive: true }).catch(() => {});
+
+app.post('/api/scan/:pin/frames', requireClientSecret, async (req, res) => {
+  const { pin } = req.params;
+  const { frames } = req.body; // string[]  base64 PNG images
+  if (!Array.isArray(frames) || frames.length === 0) {
+    return res.status(400).json({ error: 'frames array required' });
+  }
+  try {
+    const file = path.join(VIDEOS_DIR, `${pin}.json`);
+    await writeFile(file, JSON.stringify({ pin, frames, createdAt: new Date().toISOString() }), 'utf-8');
+    res.json({ ok: true, count: frames.length });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get('/api/video/:pin', requireAuth, requireActiveKey, async (req, res) => {
+  try {
+    const file = path.join(VIDEOS_DIR, `${req.params.pin}.json`);
+    const data = JSON.parse(await readFile(file, 'utf-8'));
+    // Verify the requester owns this scan
+    const scan = await getScan(req.params.pin);
+    if (scan && scan.creatorDiscordId && scan.creatorDiscordId !== req.user.discordId) {
+      return res.status(403).json({ error: 'forbidden' });
+    }
+    res.json(data);
+  } catch {
+    res.status(404).json({ error: 'no video for this pin' });
+  }
 });
 
 app.get('/api/health', (req, res) => res.json({ ok: true, version: '1.0.0' }));

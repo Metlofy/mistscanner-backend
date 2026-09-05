@@ -1,0 +1,32 @@
+{
+  "backgroundImageUrl": "https://i.imgur.com/grS5gVL.jpeg",
+  "theme": {
+    "accent": "#5b8def",
+    "panelBackground": "#07090c",
+    "panelBorder": "#1c232b",
+    "primaryText": "#e7ebee",
+    "secondaryText": "#8b96a1",
+    "mutedText": "#565f68",
+    "inputBackground": "#12161b",
+    "inputBorder": "#262c32",
+    "progressTrack": "#1a2028",
+    "error": "#e5484d",
+    "buttonText": "#06101f"
+  },
+  "labels": {
+    "pinTitle": "Personelin size verdiği kodu girin",
+    "pinSubtitle": "Tarama, doğru kod girilmeden başlamaz.",
+    "startButton": "Başlat",
+    "resultCaption": "PIN KODUNUZ",
+    "closeButton": "Kapat"
+  },
+  "brand": {
+    "logoUrl": "https://i.imgur.com/btX0LHZ.png",
+    "windowTitle": "MistScanner"
+  },
+  "options": {
+    "showStarfield": false,
+    "showLogoGlow": true,
+    "cornerRadius": 12
+  }
+}

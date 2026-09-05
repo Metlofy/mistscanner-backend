@@ -1,0 +1,237 @@
+{
+  "135388": {
+    "code": "135388",
+    "game": "FiveM",
+    "createdBy": "sa",
+    "createdAt": "2026-08-30T16:39:34.226Z",
+    "expiresAt": "2026-08-30T16:54:34.226Z",
+    "usedAt": null
+  },
+  "180165": {
+    "code": "180165",
+    "game": "FiveM",
+    "createdBy": "sa",
+    "createdAt": "2026-08-30T15:54:11.463Z",
+    "expiresAt": "2026-08-30T16:09:11.463Z",
+    "usedAt": "2026-08-30T15:54:19.445Z",
+    "status": "done",
+    "startedAt": "2026-08-30T15:54:16.339Z",
+    "progress": {
+      "headline": "Tamamlandı",
+      "detail": "cheating",
+      "percent": 100,
+      "updatedAt": "2026-08-30T15:54:19.446Z"
+    }
+  },
+  "275490": {
+    "code": "275490",
+    "game": "cs",
+    "createdBy": "sa",
+    "createdAt": "2026-08-30T17:45:58.907Z",
+    "expiresAt": "2026-08-30T18:00:58.907Z",
+    "usedAt": "2026-08-30T17:46:05.162Z",
+    "status": "done",
+    "startedAt": "2026-08-30T17:46:01.475Z",
+    "progress": {
+      "headline": "Tamamlandı",
+      "detail": "clean",
+      "percent": 100,
+      "updatedAt": "2026-08-30T17:46:05.163Z"
+    }
+  },
+  "283493": {
+    "code": "283493",
+    "game": "cs",
+    "createdBy": "sa",
+    "createdAt": "2026-08-30T18:07:26.476Z",
+    "expiresAt": "2026-08-30T18:22:26.476Z",
+    "usedAt": "2026-08-30T18:08:48.374Z",
+    "status": "done",
+    "startedAt": "2026-08-30T18:08:44.416Z",
+    "progress": {
+      "headline": "Tamamlandı",
+      "detail": "clean",
+      "percent": 100,
+      "updatedAt": "2026-08-30T18:08:48.375Z"
+    }
+  },
+  "298154": {
+    "code": "298154",
+    "game": "FiveM",
+    "createdBy": "sa",
+    "createdAt": "2026-08-30T15:05:00.284Z",
+    "expiresAt": "2026-08-30T15:20:00.284Z",
+    "usedAt": "2026-08-30T15:05:07.952Z",
+    "status": "done",
+    "startedAt": "2026-08-30T15:05:04.879Z",
+    "progress": {
+      "headline": "Tamamlandı",
+      "detail": "clean",
+      "percent": 100,
+      "updatedAt": "2026-08-30T15:05:07.952Z"
+    }
+  },
+  "341999": {
+    "code": "341999",
+    "game": null,
+    "createdBy": "sa",
+    "createdAt": "2026-08-30T15:22:23.520Z",
+    "expiresAt": "2026-08-30T15:37:23.520Z",
+    "usedAt": "2026-08-30T15:22:29.789Z",
+    "status": "done",
+    "startedAt": "2026-08-30T15:22:26.725Z",
+    "progress": {
+      "headline": "Tamamlandı",
+      "detail": "cheating",
+      "percent": 100,
+      "updatedAt": "2026-08-30T15:22:29.790Z"
+    }
+  },
+  "413048": {
+    "code": "413048",
+    "game": "Baba",
+    "createdBy": "sa",
+    "createdAt": "2026-08-30T16:07:58.904Z",
+    "expiresAt": "2026-08-30T16:22:58.904Z",
+    "usedAt": "2026-08-30T16:08:27.761Z",
+    "status": "done",
+    "startedAt": "2026-08-30T16:08:23.589Z",
+    "progress": {
+      "headline": "Tamamlandı",
+      "detail": "cheating",
+      "percent": 100,
+      "updatedAt": "2026-08-30T16:08:27.762Z"
+    }
+  },
+  "422968": {
+    "code": "422968",
+    "game": "cs",
+    "createdBy": "sa",
+    "createdAt": "2026-08-30T17:59:24.418Z",
+    "expiresAt": "2026-08-30T18:14:24.418Z",
+    "usedAt": "2026-08-30T17:59:39.563Z",
+    "status": "done",
+    "startedAt": "2026-08-30T17:59:35.619Z",
+    "progress": {
+      "headline": "Tamamlandı",
+      "detail": "clean",
+      "percent": 100,
+      "updatedAt": "2026-08-30T17:59:39.564Z"
+    }
+  },
+  "499651": {
+    "code": "499651",
+    "game": "FiveM",
+    "createdBy": "sa",
+    "createdAt": "2026-08-30T15:17:42.155Z",
+    "expiresAt": "2026-08-30T15:32:42.155Z",
+    "usedAt": "2026-08-30T15:19:02.332Z",
+    "status": "done",
+    "startedAt": "2026-08-30T15:18:59.207Z",
+    "progress": {
+      "headline": "Tamamlandı",
+      "detail": "clean",
+      "percent": 100,
+      "updatedAt": "2026-08-30T15:19:02.333Z"
+    }
+  },
+  "511979": {
+    "code": "511979",
+    "game": "FiveM",
+    "createdBy": "sa",
+    "createdAt": "2026-08-30T14:11:04.245Z",
+    "expiresAt": "2026-08-30T14:26:04.245Z",
+    "usedAt": "2026-08-30T14:11:16.038Z"
+  },
+  "647833": {
+    "code": "647833",
+    "game": null,
+    "createdBy": "sa",
+    "createdAt": "2026-08-30T16:47:04.742Z",
+    "expiresAt": "2026-08-30T17:02:04.742Z",
+    "usedAt": "2026-08-30T16:47:12.040Z",
+    "status": "done",
+    "startedAt": "2026-08-30T16:47:08.209Z",
+    "progress": {
+      "headline": "Tamamlandı",
+      "detail": "cheating",
+      "percent": 100,
+      "updatedAt": "2026-08-30T16:47:12.041Z"
+    }
+  },
+  "791375": {
+    "code": "791375",
+    "game": "Ewted04",
+    "createdBy": "xsquze0",
+    "createdAt": "2026-08-31T14:00:03.006Z",
+    "expiresAt": "2026-08-31T14:15:03.006Z",
+    "usedAt": null,
+    "startedAt": "2026-08-31T14:01:12.877Z",
+    "status": "scanning",
+    "progress": null
+  },
+  "811511": {
+    "code": "811511",
+    "game": "cs",
+    "createdBy": "sa",
+    "createdAt": "2026-08-30T18:16:52.836Z",
+    "expiresAt": "2026-08-30T18:31:52.836Z",
+    "usedAt": "2026-08-30T18:17:06.855Z",
+    "status": "done",
+    "startedAt": "2026-08-30T18:17:00.560Z",
+    "progress": {
+      "headline": "Tamamlandı",
+      "detail": "cheating",
+      "percent": 100,
+      "updatedAt": "2026-08-30T18:17:06.855Z"
+    }
+  },
+  "844870": {
+    "code": "844870",
+    "game": "csgo2",
+    "createdBy": "sa",
+    "createdAt": "2026-08-30T18:12:24.781Z",
+    "expiresAt": "2026-08-30T18:27:24.781Z",
+    "usedAt": "2026-08-30T18:12:32.797Z",
+    "status": "done",
+    "startedAt": "2026-08-30T18:12:28.875Z",
+    "progress": {
+      "headline": "Tamamlandı",
+      "detail": "clean",
+      "percent": 100,
+      "updatedAt": "2026-08-30T18:12:32.798Z"
+    }
+  },
+  "857427": {
+    "code": "857427",
+    "game": "FiveM",
+    "createdBy": "sa",
+    "createdAt": "2026-08-30T14:39:38.706Z",
+    "expiresAt": "2026-08-30T14:54:38.706Z",
+    "usedAt": "2026-08-30T14:39:47.175Z",
+    "status": "done",
+    "startedAt": "2026-08-30T14:39:44.134Z",
+    "progress": {
+      "headline": "Tamamlandı",
+      "detail": "clean",
+      "percent": 100,
+      "updatedAt": "2026-08-30T14:39:47.175Z"
+    }
+  },
+  "927693": {
+    "code": "927693",
+    "game": "FiveM",
+    "createdBy": "sa",
+    "createdAt": "2026-08-30T17:38:22.384Z",
+    "expiresAt": "2026-08-30T17:53:22.384Z",
+    "usedAt": "2026-08-30T17:38:37.717Z",
+    "status": "done",
+    "startedAt": "2026-08-30T17:38:33.961Z",
+    "progress": {
+      "headline": "Tamamlandı",
+      "detail": "cheating",
+      "percent": 100,
+      "updatedAt": "2026-08-30T17:38:37.719Z"
+    }
+  }
+}

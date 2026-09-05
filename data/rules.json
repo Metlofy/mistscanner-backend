@@ -1,0 +1,1181 @@
+[
+  {
+    "id": "rule_001",
+    "name": "Example Loader Signature",
+    "severity": "high",
+    "type": "filename",
+    "match": "example-loader.exe",
+    "note": "Placeholder rule. Replace with filenames/hashes your own staff team has verified.",
+    "enabled": true
+  },
+  {
+    "id": "rule_002",
+    "name": "Suspicious Remote Access Tool During Scan",
+    "severity": "medium",
+    "type": "filename",
+    "match": "teamviewer_setup",
+    "note": "Not inherently malicious, but flagged so staff can ask why it was running mid-scan.",
+    "enabled": true
+  },
+  {
+    "id": "rule_003",
+    "name": "Windows Defender Service Not Running",
+    "severity": "medium",
+    "type": "warning",
+    "match": "msmpeng_not_running",
+    "note": "Real-time protection disabled can indicate an attempt to hide unsigned tooling. Not proof by itself.",
+    "enabled": true
+  },
+  {
+    "id": "rule_004",
+    "name": "Unexpected Scheduled Task Created By User",
+    "severity": "medium",
+    "type": "warning",
+    "match": "user_created_task",
+    "note": "Scheduled tasks are a common persistence/injection trick. Staff should review the task name and target binary.",
+    "enabled": true
+  },
+  {
+    "id": "rule_7ff149d0",
+    "name": "Test tespiti",
+    "severity": "high",
+    "type": "filename",
+    "match": "notepad",
+    "note": "",
+    "enabled": false
+  },
+  {
+    "id": "rule_f051b271",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.170] [INFO ] [P2708:T11704] diagnostics initialized; module=0x00007FFAE9F30000 size=0x76E000",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.170] [INFO ] [P2708:T11704] diagnostics initialized; module=0x00007FFAE9F30000 size=0x76E000",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_f3a453ff",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.171] [DEBUG] [P2708:T11704] stage: dll attach",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.171] [DEBUG] [P2708:T11704] stage: dll attach",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_03d6ab5e",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.171] [DEBUG] [P2708:T11704] build: development diagnostics",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.171] [DEBUG] [P2708:T11704] build: development diagnostics",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_209fd03e",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.171] [DEBUG] [P2708:T11704] stage: crt done",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.171] [DEBUG] [P2708:T11704] stage: crt done",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_e5985769",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.174] [DEBUG] [P2708:T13956] stage: thread start",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.174] [DEBUG] [P2708:T13956] stage: thread start",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_301e0b04",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.179] [INFO ] [P2708:T13956] crash dumps enabled; path=C:\\Users\\Baba\\Desktop\\CS2CHEAT\\spinbotlu\\velocity_crash.dmp",
+    "severity": "high",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.179] [INFO ] [P2708:T13956] crash dumps enabled; path=C:\\Users\\Baba\\Desktop\\CS2CHEAT\\spinbotlu\\velocity_crash.dmp",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_77205c67",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.179] [INFO ] [P2708:T13956] crash handlers installed",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.179] [INFO ] [P2708:T13956] crash handlers installed",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_c178ccca",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.180] [DEBUG] [P2708:T13956] stage: coinit",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.180] [DEBUG] [P2708:T13956] stage: coinit",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_9b206473",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.181] [DEBUG] [P2708:T13956] stage: config",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.181] [DEBUG] [P2708:T13956] stage: config",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_7e23b8ed",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.192] [DEBUG] [P2708:T13956] stage: regions",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.192] [DEBUG] [P2708:T13956] stage: regions",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_93731226",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.192] [DEBUG] [P2708:T13956] stage: logging",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.192] [DEBUG] [P2708:T13956] stage: logging",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_36d8afde",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.403] [DEBUG] [P2708:T13956] stage: integrity",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.403] [DEBUG] [P2708:T13956] stage: integrity",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_d36be96f",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.404] [INFO ] [P2708:T13956] Source 2 fatal minidump path hooked",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.404] [INFO ] [P2708:T13956] Source 2 fatal minidump path hooked",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_4056bbde",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.404] [INFO ] [P2708:T13956] forced process termination capture hooked",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.404] [INFO ] [P2708:T13956] forced process termination capture hooked",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_979eea9f",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.424] [DEBUG] [P2708:T13956] stage: addresses",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.424] [DEBUG] [P2708:T13956] stage: addresses",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_879ce860",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] client:              0x7ffaf68d0000",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] client:              0x7ffaf68d0000",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_b08311e5",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] engine2:             0x7ffb08be0000",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] engine2:             0x7ffb08be0000",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_de1faa93",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] server:              0x7ffaf90b0000",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] server:              0x7ffaf90b0000",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_a47d5535",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] scene_system:        0x7ffb019a0000",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] scene_system:        0x7ffb019a0000",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_0cce86bf",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] material_system2:    0x7ffb54290000",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] material_system2:    0x7ffb54290000",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_c6e78475",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] render_system_dx11:  0x7ffb07e10000",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] render_system_dx11:  0x7ffb07e10000",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_1edd89fb",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] panorama:            0x7ffafba10000",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] panorama:            0x7ffafba10000",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_44fd351a",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] game_overlay:        0x7ffb09950000",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] game_overlay:        0x7ffb09950000",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_9df16aca",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] schema_system:       0x7ffb2a3f0000",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] schema_system:       0x7ffb2a3f0000",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_95a626cd",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] input_system:        0x7ffb4b350000",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] input_system:        0x7ffb4b350000",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_32b23b81",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] sound_system:        0x7ffb058d0000",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] sound_system:        0x7ffb058d0000",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_45cfa847",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] tier0:               0x7ffb09550000",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] tier0:               0x7ffb09550000",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_ea613c34",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] particles:           0x7ffb01180000",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] particles:           0x7ffb01180000",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_7035bf20",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] resource_system:     0x7ffb2b6f0000",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] resource_system:     0x7ffb2b6f0000",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_f129d2ae",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] localize:            0x7ffb4a200000",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] localize:            0x7ffb4a200000",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_2218d5af",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] mesh_system:         0x7ffb23440000",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.424] [INFO ] [P2708:T13956] [modules] mesh_system:         0x7ffb23440000",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_b69ab5c2",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.425] [INFO ] [P2708:T13956] [modules] file_system_stdio:   0x7ffb082c0000",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.425] [INFO ] [P2708:T13956] [modules] file_system_stdio:   0x7ffb082c0000",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_d40be377",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.425] [INFO ] [P2708:T13956] [modules] vphysics2:           0x7ffb05fb0000",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.425] [INFO ] [P2708:T13956] [modules] vphysics2:           0x7ffb05fb0000",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_4ff13a55",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:17.980] [DEBUG] [P2708:T13956] stage: systems",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:17.980] [DEBUG] [P2708:T13956] stage: systems",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_97f33122",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:18.317] [INFO ] [P2708:T13956] [model_preview] initialized",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:18.317] [INFO ] [P2708:T13956] [model_preview] initialized",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_1f4de8ae",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:18.318] [DEBUG] [P2708:T13956] stage: econ",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:18.318] [DEBUG] [P2708:T13956] stage: econ",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_4bded603",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:18.614] [DEBUG] [P2708:T13956] stage: hooks",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:18.614] [DEBUG] [P2708:T13956] stage: hooks",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_21402a50",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:19.042] [DEBUG] [P2708:T13956] stage: cvars",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:19.042] [DEBUG] [P2708:T13956] stage: cvars",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_fcbf8fb7",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:19.043] [DEBUG] [P2708:T13956] stage: skyboxes",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:19.043] [DEBUG] [P2708:T13956] stage: skyboxes",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_ad4b2166",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:19.044] [DEBUG] [P2708:T13956] stage: done",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:19.044] [DEBUG] [P2708:T13956] stage: done",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_6bae2a90",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:39.216] [INFO ] [P2708:T3720] [scoreboard_weapons] injecting HUD setup script (engine=0x3d00719b800 panel=0x3d0c3165500)",
+    "severity": "high",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:39.216] [INFO ] [P2708:T3720] [scoreboard_weapons] injecting HUD setup script (engine=0x3d00719b800 panel=0x3d0c3165500)",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_85782fd5",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:39.237] [INFO ] [P2708:T3720] [scoreboard_weapons] setup script injected",
+    "severity": "high",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:39.237] [INFO ] [P2708:T3720] [scoreboard_weapons] setup script injected",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_d632ce70",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:49.420] [INFO ] [P2708:T3720] [scoreboard_weapons] level change — state reset",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:49.420] [INFO ] [P2708:T3720] [scoreboard_weapons] level change — state reset",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_225a3044",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:49.426] [INFO ] [P2708:T3720] [scoreboard_weapons] level change — state reset",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:49.426] [INFO ] [P2708:T3720] [scoreboard_weapons] level change — state reset",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_0e4b8d7e",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.553] [DEBUG] [P2708:T3720] create_move: feature pipeline begin",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.553] [DEBUG] [P2708:T3720] create_move: feature pipeline begin",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_fc5d5b79",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.554] [DEBUG] [P2708:T3720] create_move: shared and combat misc ready",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.554] [DEBUG] [P2708:T3720] create_move: shared and combat misc ready",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_3ed58065",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.555] [DEBUG] [P2708:T3720] create_move: pre-combat movement end",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.555] [DEBUG] [P2708:T3720] create_move: pre-combat movement end",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_d306c2b3",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.555] [DEBUG] [P2708:T3720] create_move: rage begin",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.555] [DEBUG] [P2708:T3720] create_move: rage begin",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_c3a4847c",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.605] [DEBUG] [P2708:T3720] prediction: state saved",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.605] [DEBUG] [P2708:T3720] prediction: state saved",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_836b34da",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.605] [DEBUG] [P2708:T3720] prediction: context ready",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.605] [DEBUG] [P2708:T3720] prediction: context ready",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_494db6e1",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.605] [DEBUG] [P2708:T3720] prediction: move ready",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.605] [DEBUG] [P2708:T3720] prediction: move ready",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_255b4169",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.605] [DEBUG] [P2708:T3720] prediction: movement processed",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.605] [DEBUG] [P2708:T3720] prediction: movement processed",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_9c19e074",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.605] [DEBUG] [P2708:T3720] prediction: move finished",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.605] [DEBUG] [P2708:T3720] prediction: move finished",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_a65ea86b",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.605] [DEBUG] [P2708:T3720] prediction: context cleaned",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.605] [DEBUG] [P2708:T3720] prediction: context cleaned",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_3c8568f9",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.605] [DEBUG] [P2708:T3720] prediction: callback begin",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.605] [DEBUG] [P2708:T3720] prediction: callback begin",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_07f825e3",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.609] [DEBUG] [P2708:T3720] prediction: callback end",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.609] [DEBUG] [P2708:T3720] prediction: callback end",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_85c27103",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.609] [DEBUG] [P2708:T3720] prediction: restore begin",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.609] [DEBUG] [P2708:T3720] prediction: restore begin",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_62764279",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.609] [DEBUG] [P2708:T3720] prediction: restore end",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.609] [DEBUG] [P2708:T3720] prediction: restore end",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_5a4644b8",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.610] [DEBUG] [P2708:T3720] create_move: rage end",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.610] [DEBUG] [P2708:T3720] create_move: rage end",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_0a9884f0",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.610] [DEBUG] [P2708:T3720] create_move: legit begin",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.610] [DEBUG] [P2708:T3720] create_move: legit begin",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_a8ea20a6",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.616] [DEBUG] [P2708:T3720] create_move: legit end",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.616] [DEBUG] [P2708:T3720] create_move: legit end",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_832161eb",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.616] [DEBUG] [P2708:T3720] create_move: post-combat movement end",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.616] [DEBUG] [P2708:T3720] create_move: post-combat movement end",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_96ddd8c8",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.616] [DEBUG] [P2708:T3720] create_move: quickpeek end",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.616] [DEBUG] [P2708:T3720] create_move: quickpeek end",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_32949ccd",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.616] [DEBUG] [P2708:T3720] create_move: final subtick begin",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.616] [DEBUG] [P2708:T3720] create_move: final subtick begin",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_5762b594",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.616] [DEBUG] [P2708:T3720] create_move: final subtick end",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.616] [DEBUG] [P2708:T3720] create_move: final subtick end",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_9a4b26e5",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.617] [DEBUG] [P2708:T3720] create_move: input apply begin",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.617] [DEBUG] [P2708:T3720] create_move: input apply begin",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_79119f0f",
+    "name": "Bilinen Dosya: [2026-08-30 19:00:57.674] [DEBUG] [P2708:T3720] create_move: input apply end",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:00:57.674] [DEBUG] [P2708:T3720] create_move: input apply end",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_5bfd7e0b",
+    "name": "Bilinen Dosya: [2026-08-30 19:01:27.499] [INFO ] [P2708:T3720] [rage] hc=0.04 needed=0.80 inacc=0.5991 spread=0.0020 samples=256 dmg=152/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:01:27.499] [INFO ] [P2708:T3720] [rage] hc=0.04 needed=0.80 inacc=0.5991 spread=0.0020 samples=256 dmg=152/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_a993037b",
+    "name": "Bilinen Dosya: [2026-08-30 19:01:32.326] [INFO ] [P2708:T3720] [rage] hc=0.30 needed=0.80 inacc=0.0345 spread=0.0020 samples=256 dmg=170/54",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:01:32.326] [INFO ] [P2708:T3720] [rage] hc=0.30 needed=0.80 inacc=0.0345 spread=0.0020 samples=256 dmg=170/54",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_ff9fd082",
+    "name": "Bilinen Dosya: [2026-08-30 19:01:51.772] [INFO ] [P2708:T3720] [scoreboard_weapons] injecting HUD setup script (engine=0x3d00719b800 panel=0x3d0c3165500)",
+    "severity": "high",
+    "type": "filename",
+    "match": "[2026-08-30 19:01:51.772] [INFO ] [P2708:T3720] [scoreboard_weapons] injecting HUD setup script (engine=0x3d00719b800 panel=0x3d0c3165500)",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_3720e989",
+    "name": "Bilinen Dosya: [2026-08-30 19:01:51.774] [INFO ] [P2708:T3720] [scoreboard_weapons] setup script injected",
+    "severity": "high",
+    "type": "filename",
+    "match": "[2026-08-30 19:01:51.774] [INFO ] [P2708:T3720] [scoreboard_weapons] setup script injected",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_0a54d047",
+    "name": "Bilinen Dosya: [2026-08-30 19:02:14.969] [INFO ] [P2708:T3720] [rage] hc=0.06 needed=0.80 inacc=0.1864 spread=0.0006 samples=256 dmg=105/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:02:14.969] [INFO ] [P2708:T3720] [rage] hc=0.06 needed=0.80 inacc=0.1864 spread=0.0006 samples=256 dmg=105/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_0b737e71",
+    "name": "Bilinen Dosya: [2026-08-30 19:02:20.730] [INFO ] [P2708:T3720] [rage] hc=0.07 needed=0.80 inacc=0.2379 spread=0.0006 samples=256 dmg=107/56",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:02:20.730] [INFO ] [P2708:T3720] [rage] hc=0.07 needed=0.80 inacc=0.2379 spread=0.0006 samples=256 dmg=107/56",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_58f783cc",
+    "name": "Bilinen Dosya: [2026-08-30 19:02:21.731] [INFO ] [P2708:T3720] [rage] hc=0.07 needed=0.80 inacc=0.2897 spread=0.0006 samples=256 dmg=108/77",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:02:21.731] [INFO ] [P2708:T3720] [rage] hc=0.07 needed=0.80 inacc=0.2897 spread=0.0006 samples=256 dmg=108/77",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_b1226981",
+    "name": "Bilinen Dosya: [2026-08-30 19:02:22.737] [INFO ] [P2708:T3720] [rage] hc=0.10 needed=0.80 inacc=0.2185 spread=0.0006 samples=256 dmg=109/97",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:02:22.737] [INFO ] [P2708:T3720] [rage] hc=0.10 needed=0.80 inacc=0.2185 spread=0.0006 samples=256 dmg=109/97",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_d6dfb5fd",
+    "name": "Bilinen Dosya: [2026-08-30 19:02:25.348] [INFO ] [P2708:T3720] [rage] hc=0.06 needed=0.80 inacc=0.2005 spread=0.0006 samples=256 dmg=107/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:02:25.348] [INFO ] [P2708:T3720] [rage] hc=0.06 needed=0.80 inacc=0.2005 spread=0.0006 samples=256 dmg=107/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_145534c9",
+    "name": "Bilinen Dosya: [2026-08-30 19:02:28.205] [INFO ] [P2708:T3720] [rage] hc=0.11 needed=0.80 inacc=0.2097 spread=0.0006 samples=256 dmg=109/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:02:28.205] [INFO ] [P2708:T3720] [rage] hc=0.11 needed=0.80 inacc=0.2097 spread=0.0006 samples=256 dmg=109/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_9dcba600",
+    "name": "Bilinen Dosya: [2026-08-30 19:02:29.534] [INFO ] [P2708:T3720] [rage] hc=0.14 needed=0.80 inacc=0.2247 spread=0.0006 samples=256 dmg=110/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:02:29.534] [INFO ] [P2708:T3720] [rage] hc=0.14 needed=0.80 inacc=0.2247 spread=0.0006 samples=256 dmg=110/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_1e8f0a25",
+    "name": "Bilinen Dosya: [2026-08-30 19:02:34.033] [INFO ] [P2708:T3720] [rage] hc=0.08 needed=0.80 inacc=0.1531 spread=0.0006 samples=256 dmg=107/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:02:34.033] [INFO ] [P2708:T3720] [rage] hc=0.08 needed=0.80 inacc=0.1531 spread=0.0006 samples=256 dmg=107/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_05a1db56",
+    "name": "Bilinen Dosya: [2026-08-30 19:02:35.078] [INFO ] [P2708:T3720] [rage] hc=0.09 needed=0.80 inacc=0.2326 spread=0.0006 samples=256 dmg=108/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:02:35.078] [INFO ] [P2708:T3720] [rage] hc=0.09 needed=0.80 inacc=0.2326 spread=0.0006 samples=256 dmg=108/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_24ff68bf",
+    "name": "Bilinen Dosya: [2026-08-30 19:02:42.552] [INFO ] [P2708:T3720] [rage] hc=0.14 needed=0.80 inacc=0.2032 spread=0.0006 samples=256 dmg=109/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:02:42.552] [INFO ] [P2708:T3720] [rage] hc=0.14 needed=0.80 inacc=0.2032 spread=0.0006 samples=256 dmg=109/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_79e93e35",
+    "name": "Bilinen Dosya: [2026-08-30 19:02:50.215] [INFO ] [P2708:T3720] [rage] hc=0.14 needed=0.80 inacc=0.0572 spread=0.0020 samples=256 dmg=143/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:02:50.215] [INFO ] [P2708:T3720] [rage] hc=0.14 needed=0.80 inacc=0.0572 spread=0.0020 samples=256 dmg=143/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_1676cd3f",
+    "name": "Bilinen Dosya: [2026-08-30 19:02:51.253] [INFO ] [P2708:T3720] [rage] hc=0.26 needed=0.80 inacc=0.0307 spread=0.0020 samples=256 dmg=149/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:02:51.253] [INFO ] [P2708:T3720] [rage] hc=0.26 needed=0.80 inacc=0.0307 spread=0.0020 samples=256 dmg=149/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_eb568d5c",
+    "name": "Bilinen Dosya: [2026-08-30 19:02:55.531] [INFO ] [P2708:T3720] [rage] hc=0.07 needed=0.80 inacc=0.1791 spread=0.0006 samples=256 dmg=106/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:02:55.531] [INFO ] [P2708:T3720] [rage] hc=0.07 needed=0.80 inacc=0.1791 spread=0.0006 samples=256 dmg=106/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_28be2257",
+    "name": "Bilinen Dosya: [2026-08-30 19:02:56.572] [INFO ] [P2708:T3720] [rage] hc=0.27 needed=0.80 inacc=0.0322 spread=0.0006 samples=256 dmg=107/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:02:56.572] [INFO ] [P2708:T3720] [rage] hc=0.27 needed=0.80 inacc=0.0322 spread=0.0006 samples=256 dmg=107/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_e39f1ec3",
+    "name": "Bilinen Dosya: [2026-08-30 19:02:57.583] [INFO ] [P2708:T3720] [rage] hc=0.12 needed=0.80 inacc=0.1642 spread=0.0006 samples=256 dmg=109/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:02:57.583] [INFO ] [P2708:T3720] [rage] hc=0.12 needed=0.80 inacc=0.1642 spread=0.0006 samples=256 dmg=109/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_234530d9",
+    "name": "Bilinen Dosya: [2026-08-30 19:03:08.843] [INFO ] [P2708:T3720] [rage] hc=0.09 needed=0.80 inacc=0.1737 spread=0.0006 samples=256 dmg=108/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:03:08.843] [INFO ] [P2708:T3720] [rage] hc=0.09 needed=0.80 inacc=0.1737 spread=0.0006 samples=256 dmg=108/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_2237c3bc",
+    "name": "Bilinen Dosya: [2026-08-30 19:03:09.835] [INFO ] [P2708:T3720] [rage] hc=0.11 needed=0.80 inacc=0.2178 spread=0.0006 samples=256 dmg=109/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:03:09.835] [INFO ] [P2708:T3720] [rage] hc=0.11 needed=0.80 inacc=0.2178 spread=0.0006 samples=256 dmg=109/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_002b27ed",
+    "name": "Bilinen Dosya: [2026-08-30 19:03:10.878] [INFO ] [P2708:T3720] [rage] hc=0.12 needed=0.80 inacc=0.2397 spread=0.0006 samples=256 dmg=110/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:03:10.878] [INFO ] [P2708:T3720] [rage] hc=0.12 needed=0.80 inacc=0.2397 spread=0.0006 samples=256 dmg=110/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_30896542",
+    "name": "Bilinen Dosya: [2026-08-30 19:03:20.753] [INFO ] [P2708:T3720] [rage] hc=0.08 needed=0.80 inacc=0.0480 spread=0.0006 samples=256 dmg=101/72",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:03:20.753] [INFO ] [P2708:T3720] [rage] hc=0.08 needed=0.80 inacc=0.0480 spread=0.0006 samples=256 dmg=101/72",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_43951f25",
+    "name": "Bilinen Dosya: [2026-08-30 19:03:22.960] [INFO ] [P2708:T3720] [rage] hc=0.04 needed=0.80 inacc=0.1815 spread=0.0006 samples=256 dmg=32/27",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:03:22.960] [INFO ] [P2708:T3720] [rage] hc=0.04 needed=0.80 inacc=0.1815 spread=0.0006 samples=256 dmg=32/27",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_ff72fa90",
+    "name": "Bilinen Dosya: [2026-08-30 19:03:24.868] [INFO ] [P2708:T3720] [rage] hc=0.07 needed=0.80 inacc=0.1966 spread=0.0006 samples=256 dmg=107/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:03:24.868] [INFO ] [P2708:T3720] [rage] hc=0.07 needed=0.80 inacc=0.1966 spread=0.0006 samples=256 dmg=107/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_86e9bfdd",
+    "name": "Bilinen Dosya: [2026-08-30 19:03:25.955] [INFO ] [P2708:T3720] [rage] hc=0.36 needed=0.80 inacc=0.0209 spread=0.0006 samples=256 dmg=107/47",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:03:25.955] [INFO ] [P2708:T3720] [rage] hc=0.36 needed=0.80 inacc=0.0209 spread=0.0006 samples=256 dmg=107/47",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_ce152a55",
+    "name": "Bilinen Dosya: [2026-08-30 19:03:36.067] [INFO ] [P2708:T3720] [rage] hc=0.20 needed=0.80 inacc=0.0135 spread=0.0006 samples=256 dmg=103/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:03:36.067] [INFO ] [P2708:T3720] [rage] hc=0.20 needed=0.80 inacc=0.0135 spread=0.0006 samples=256 dmg=103/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_00008b8a",
+    "name": "Bilinen Dosya: [2026-08-30 19:03:37.434] [INFO ] [P2708:T3720] [rage] hc=0.15 needed=0.80 inacc=0.0192 spread=0.0006 samples=256 dmg=104/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:03:37.434] [INFO ] [P2708:T3720] [rage] hc=0.15 needed=0.80 inacc=0.0192 spread=0.0006 samples=256 dmg=104/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_e440606a",
+    "name": "Bilinen Dosya: [2026-08-30 19:03:38.474] [INFO ] [P2708:T3720] [rage] hc=0.37 needed=0.80 inacc=0.0113 spread=0.0006 samples=256 dmg=104/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:03:38.474] [INFO ] [P2708:T3720] [rage] hc=0.37 needed=0.80 inacc=0.0113 spread=0.0006 samples=256 dmg=104/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_0d96becf",
+    "name": "Bilinen Dosya: [2026-08-30 19:03:39.538] [INFO ] [P2708:T3720] [rage] hc=0.06 needed=0.80 inacc=0.1652 spread=0.0006 samples=256 dmg=105/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:03:39.538] [INFO ] [P2708:T3720] [rage] hc=0.06 needed=0.80 inacc=0.1652 spread=0.0006 samples=256 dmg=105/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_e5d746db",
+    "name": "Bilinen Dosya: [2026-08-30 19:03:40.543] [INFO ] [P2708:T3720] [rage] hc=0.06 needed=0.80 inacc=0.1595 spread=0.0006 samples=256 dmg=105/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:03:40.543] [INFO ] [P2708:T3720] [rage] hc=0.06 needed=0.80 inacc=0.1595 spread=0.0006 samples=256 dmg=105/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_4000dee3",
+    "name": "Bilinen Dosya: [2026-08-30 19:03:41.916] [INFO ] [P2708:T3720] [rage] hc=0.04 needed=0.80 inacc=0.2080 spread=0.0006 samples=256 dmg=104/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:03:41.916] [INFO ] [P2708:T3720] [rage] hc=0.04 needed=0.80 inacc=0.2080 spread=0.0006 samples=256 dmg=104/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_51a2cf35",
+    "name": "Bilinen Dosya: [2026-08-30 19:03:44.181] [INFO ] [P2708:T3720] [rage] hc=0.11 needed=0.80 inacc=0.1079 spread=0.0006 samples=256 dmg=107/44",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:03:44.181] [INFO ] [P2708:T3720] [rage] hc=0.11 needed=0.80 inacc=0.1079 spread=0.0006 samples=256 dmg=107/44",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_909698e6",
+    "name": "Bilinen Dosya: [2026-08-30 19:03:45.180] [INFO ] [P2708:T3720] [rage] hc=0.20 needed=0.80 inacc=0.0701 spread=0.0006 samples=256 dmg=109/44",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:03:45.180] [INFO ] [P2708:T3720] [rage] hc=0.20 needed=0.80 inacc=0.0701 spread=0.0006 samples=256 dmg=109/44",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_087f2d3f",
+    "name": "Bilinen Dosya: [2026-08-30 19:03:56.439] [INFO ] [P2708:T3720] [rage] hc=0.36 needed=0.80 inacc=0.0152 spread=0.0006 samples=256 dmg=106/74",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:03:56.439] [INFO ] [P2708:T3720] [rage] hc=0.36 needed=0.80 inacc=0.0152 spread=0.0006 samples=256 dmg=106/74",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_701339dd",
+    "name": "Bilinen Dosya: [2026-08-30 19:04:08.341] [INFO ] [P2708:T3720] [rage] hc=0.06 needed=0.80 inacc=0.3789 spread=0.0020 samples=256 dmg=152/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:04:08.341] [INFO ] [P2708:T3720] [rage] hc=0.06 needed=0.80 inacc=0.3789 spread=0.0020 samples=256 dmg=152/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_9361c990",
+    "name": "Bilinen Dosya: [2026-08-30 19:04:12.183] [INFO ] [P2708:T3720] [rage] hc=0.15 needed=0.80 inacc=0.0337 spread=0.0020 samples=256 dmg=133/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:04:12.183] [INFO ] [P2708:T3720] [rage] hc=0.15 needed=0.80 inacc=0.0337 spread=0.0020 samples=256 dmg=133/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_f154efea",
+    "name": "Bilinen Dosya: [2026-08-30 19:04:14.366] [INFO ] [P2708:T3720] [rage] hc=0.17 needed=0.80 inacc=0.0499 spread=0.0020 samples=256 dmg=144/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:04:14.366] [INFO ] [P2708:T3720] [rage] hc=0.17 needed=0.80 inacc=0.0499 spread=0.0020 samples=256 dmg=144/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_083aa9ce",
+    "name": "Bilinen Dosya: [2026-08-30 19:04:15.353] [INFO ] [P2708:T3720] [rage] hc=0.38 needed=0.80 inacc=0.0226 spread=0.0020 samples=256 dmg=40/13",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:04:15.353] [INFO ] [P2708:T3720] [rage] hc=0.38 needed=0.80 inacc=0.0226 spread=0.0020 samples=256 dmg=40/13",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_7fa538a6",
+    "name": "Bilinen Dosya: [2026-08-30 19:04:18.599] [INFO ] [P2708:T3720] [rage] hc=0.18 needed=0.80 inacc=0.0477 spread=0.0006 samples=256 dmg=107/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:04:18.599] [INFO ] [P2708:T3720] [rage] hc=0.18 needed=0.80 inacc=0.0477 spread=0.0006 samples=256 dmg=107/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_d6c76b74",
+    "name": "Bilinen Dosya: [2026-08-30 19:04:30.596] [INFO ] [P2708:T3720] [rage] hc=0.31 needed=0.80 inacc=0.0325 spread=0.0006 samples=256 dmg=108/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:04:30.596] [INFO ] [P2708:T3720] [rage] hc=0.31 needed=0.80 inacc=0.0325 spread=0.0006 samples=256 dmg=108/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_1b22fd37",
+    "name": "Bilinen Dosya: [2026-08-30 19:04:48.682] [INFO ] [P2708:T3720] [rage] hc=0.10 needed=0.80 inacc=0.1572 spread=0.0006 samples=256 dmg=108/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:04:48.682] [INFO ] [P2708:T3720] [rage] hc=0.10 needed=0.80 inacc=0.1572 spread=0.0006 samples=256 dmg=108/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_6d80ed4a",
+    "name": "Bilinen Dosya: [2026-08-30 19:04:49.702] [INFO ] [P2708:T3720] [rage] hc=0.11 needed=0.80 inacc=0.2282 spread=0.0006 samples=256 dmg=109/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:04:49.702] [INFO ] [P2708:T3720] [rage] hc=0.11 needed=0.80 inacc=0.2282 spread=0.0006 samples=256 dmg=109/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_c9b03dc8",
+    "name": "Bilinen Dosya: [2026-08-30 19:04:53.001] [INFO ] [P2708:T3720] [rage] hc=0.05 needed=0.80 inacc=0.1830 spread=0.0006 samples=256 dmg=106/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:04:53.001] [INFO ] [P2708:T3720] [rage] hc=0.05 needed=0.80 inacc=0.1830 spread=0.0006 samples=256 dmg=106/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_9a66280c",
+    "name": "Bilinen Dosya: [2026-08-30 19:04:53.994] [INFO ] [P2708:T3720] [rage] hc=0.08 needed=0.80 inacc=0.1559 spread=0.0006 samples=256 dmg=107/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:04:53.994] [INFO ] [P2708:T3720] [rage] hc=0.08 needed=0.80 inacc=0.1559 spread=0.0006 samples=256 dmg=107/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_8d89decb",
+    "name": "Bilinen Dosya: [2026-08-30 19:04:55.071] [INFO ] [P2708:T3720] [rage] hc=0.09 needed=0.80 inacc=0.2305 spread=0.0006 samples=256 dmg=108/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:04:55.071] [INFO ] [P2708:T3720] [rage] hc=0.09 needed=0.80 inacc=0.2305 spread=0.0006 samples=256 dmg=108/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_3786600f",
+    "name": "Bilinen Dosya: [2026-08-30 19:04:56.096] [INFO ] [P2708:T3720] [rage] hc=0.39 needed=0.80 inacc=0.0163 spread=0.0006 samples=256 dmg=107/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:04:56.096] [INFO ] [P2708:T3720] [rage] hc=0.39 needed=0.80 inacc=0.0163 spread=0.0006 samples=256 dmg=107/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_b29665a7",
+    "name": "Bilinen Dosya: [2026-08-30 19:05:02.342] [INFO ] [P2708:T3720] [rage] hc=0.09 needed=0.80 inacc=0.0775 spread=0.0006 samples=256 dmg=106/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:05:02.342] [INFO ] [P2708:T3720] [rage] hc=0.09 needed=0.80 inacc=0.0775 spread=0.0006 samples=256 dmg=106/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_357b195a",
+    "name": "Bilinen Dosya: [2026-08-30 19:05:13.215] [INFO ] [P2708:T3720] [rage] hc=0.40 needed=0.80 inacc=0.0128 spread=0.0006 samples=256 dmg=107/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:05:13.215] [INFO ] [P2708:T3720] [rage] hc=0.40 needed=0.80 inacc=0.0128 spread=0.0006 samples=256 dmg=107/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_f1c354c7",
+    "name": "Bilinen Dosya: [2026-08-30 19:11:05.350] [INFO ] [P2708:T3720] [rage] hc=0.07 needed=0.80 inacc=0.1651 spread=0.0006 samples=256 dmg=107/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:11:05.350] [INFO ] [P2708:T3720] [rage] hc=0.07 needed=0.80 inacc=0.1651 spread=0.0006 samples=256 dmg=107/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_2ec1d378",
+    "name": "Bilinen Dosya: [2026-08-30 19:11:07.917] [INFO ] [P2708:T3720] [rage] hc=0.26 needed=0.80 inacc=0.0128 spread=0.0006 samples=256 dmg=103/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:11:07.917] [INFO ] [P2708:T3720] [rage] hc=0.26 needed=0.80 inacc=0.0128 spread=0.0006 samples=256 dmg=103/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_ec985708",
+    "name": "Bilinen Dosya: [2026-08-30 19:11:08.934] [INFO ] [P2708:T3720] [rage] hc=0.27 needed=0.80 inacc=0.0128 spread=0.0006 samples=256 dmg=103/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:11:08.934] [INFO ] [P2708:T3720] [rage] hc=0.27 needed=0.80 inacc=0.0128 spread=0.0006 samples=256 dmg=103/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_5a985938",
+    "name": "Bilinen Dosya: [2026-08-30 19:11:09.954] [INFO ] [P2708:T3720] [rage] hc=0.34 needed=0.80 inacc=0.0113 spread=0.0006 samples=256 dmg=104/100",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:11:09.954] [INFO ] [P2708:T3720] [rage] hc=0.34 needed=0.80 inacc=0.0113 spread=0.0006 samples=256 dmg=104/100",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_61c233ca",
+    "name": "Bilinen Dosya: [2026-08-30 19:11:11.055] [INFO ] [P2708:T3720] [rage] hc=0.33 needed=0.80 inacc=0.0151 spread=0.0006 samples=256 dmg=105/74",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:11:11.055] [INFO ] [P2708:T3720] [rage] hc=0.33 needed=0.80 inacc=0.0151 spread=0.0006 samples=256 dmg=105/74",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_b5258f8a",
+    "name": "Bilinen Dosya: [2026-08-30 19:11:12.078] [INFO ] [P2708:T3720] [rage] hc=0.36 needed=0.80 inacc=0.0133 spread=0.0006 samples=256 dmg=105/48",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:11:12.078] [INFO ] [P2708:T3720] [rage] hc=0.36 needed=0.80 inacc=0.0133 spread=0.0006 samples=256 dmg=105/48",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_cd98d96a",
+    "name": "Bilinen Dosya: [2026-08-30 19:11:19.726] [INFO ] [P2708:T3720] [rage] hc=0.21 needed=0.80 inacc=0.1815 spread=0.0006 samples=256 dmg=27/13",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:11:19.726] [INFO ] [P2708:T3720] [rage] hc=0.21 needed=0.80 inacc=0.1815 spread=0.0006 samples=256 dmg=27/13",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_f0779cb5",
+    "name": "Bilinen Dosya: [2026-08-30 19:11:31.535] [INFO ] [P2708:T3720] [scoreboard_weapons] level change — state reset",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:11:31.535] [INFO ] [P2708:T3720] [scoreboard_weapons] level change — state reset",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_d54da371",
+    "name": "Bilinen Dosya: [2026-08-30 19:11:31.536] [INFO ] [P2708:T3720] [scoreboard_weapons] level change — state reset",
+    "severity": "medium",
+    "type": "filename",
+    "match": "[2026-08-30 19:11:31.536] [INFO ] [P2708:T3720] [scoreboard_weapons] level change — state reset",
+    "note": "Toplu içe aktarma ile eklendi (kaynak: velocity_init.log). Dosya adı/alt dizge eşleşmesi - yeniden adlandırmayla atlatılabilir, tek başına kesin kanıt değildir.",
+    "enabled": true
+  },
+  {
+    "id": "rule_03dfd1ea",
+    "name": "Bilinen Hash (velocityAmbiV16.dll)",
+    "severity": "high",
+    "type": "hash",
+    "match": "f2c79ce9d632b6652a51b3cbeb8a7f4a1354091b",
+    "note": "Cheat dosyasından çıkarıldı: velocityAmbiV16.dll (7655424 bytes) - staff panelinden hash'lenerek eklendi.",
+    "enabled": true
+  }
+]

@@ -10,6 +10,7 @@ function collectArtifactNames(report) {
   for (const a of report.amcache ?? []) names.push(a.path);
   for (const r of report.rpf ?? []) names.push(r.path);
   for (const m of report.modules ?? []) names.push(m.moduleName, m.path, m.ownerProcess);
+  for (const r of report.memoryRegions ?? []) if (r.strings_found) names.push(r.strings_found);
   for (const k of report.runKeys ?? []) names.push(k.name, k.command, k.hive);
   for (const d of report.deletedFiles ?? []) names.push(d.originalPath ?? d.path);
   for (const n of report.networkConnections ?? []) names.push(n.remoteAddress, n.processName);
