@@ -163,7 +163,10 @@ app.get('/auth/callback', async (req, res) => {
   try {
     const tokenRes = await fetch('https://discord.com/api/oauth2/token', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      headers: { 
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'User-Agent': 'MistScanner (https://github.com/Metlofy, 1.0)'
+      },
       body: new URLSearchParams({
         client_id: DISCORD_CLIENT_ID,
         client_secret: DISCORD_CLIENT_SECRET,
@@ -172,12 +175,18 @@ app.get('/auth/callback', async (req, res) => {
         redirect_uri: `${BACKEND_URL}/auth/callback`,
       }),
     });
+    if (!tokenRes.ok && tokenRes.status === 403) {
+      throw new Error("Discord Cloudflare tarafindan Render IP'niz engellendi. Lutfen Discord API User-Agent ayarlarini kontrol edin: " + await tokenRes.text());
+    }
     const tokenData = await tokenRes.json();
     if (!tokenData.access_token) {
       return res.redirect(`${DASHBOARD_URL}?auth_error=token_failed`);
     }
     const userRes = await fetch('https://discord.com/api/users/@me', {
-      headers: { Authorization: `Bearer ${tokenData.access_token}` },
+      headers: { 
+        Authorization: `Bearer ${tokenData.access_token}`,
+        'User-Agent': 'MistScanner (https://github.com/Metlofy, 1.0)'
+      },
     });
     const user = await userRes.json();
     if (!user.id) return res.redirect(`${DASHBOARD_URL}?auth_error=user_failed`);
